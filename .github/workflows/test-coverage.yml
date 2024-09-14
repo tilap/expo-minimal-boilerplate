@@ -33,6 +33,8 @@ jobs:
 
       - name: Write coverage to a separate file 📝
         run: |
+          set -x  # Enable debugging
+          
           COVERAGE=$(grep -oE 'All files\s+\|\s+\K[0-9]+(\.[0-9]+)?(?=%)' coverage/lcov.info | head -n 1)
           TOTAL_TESTS=$(grep -oE 'Tests\s+\|\s+\K[0-9]+' coverage/lcov.info | head -n 1)
           PASSED_TESTS=$(grep -oE 'Passes\s+\|\s+\K[0-9]+' coverage/lcov.info | head -n 1)
