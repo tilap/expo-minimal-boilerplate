@@ -9,7 +9,7 @@ import { DarkMode, useDarkmode, useSetDarkmode } from "@contexts/darkmode";
 import { useT } from "@contexts/i18n/index";
 import React from "react";
 
-const iconMap: Record<DarkMode, any> = {
+const iconMap: Record<DarkMode, React.ElementType> = {
   dark: DarkmodeDarkIcon,
   light: DarkmodeLightIcon,
   system: DarkmmodeAutomaticIcon,
