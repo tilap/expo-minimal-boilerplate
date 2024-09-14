@@ -89,4 +89,12 @@ module.exports = {
 
     "prettier/prettier": "error",
   },
+  overrides: [
+    {
+      files: ["**/*.test.ts", "**/*.spec.ts"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off", // Disable the rule for test files
+      },
+    },
+  ],
 };
