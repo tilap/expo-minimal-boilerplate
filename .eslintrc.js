@@ -76,7 +76,8 @@ module.exports = {
         vars: "all",
         args: "after-used",
         ignoreRestSiblings: true,
-        varsIgnorePattern: "^_", // Ignore variables that start with an underscore
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
       },
     ],
 
