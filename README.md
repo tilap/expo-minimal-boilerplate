@@ -31,12 +31,12 @@ Keep it bare so:
 
 ### Screenshots
 
-![Home](https://i.postimg.cc/rKwsdNPp/IMG-3620.png)
-![Preferences](https://i.postimg.cc/2bdyWcY1/IMG-3621.png)
-![Dark mode](https://i.postimg.cc/fSwLfcWB/IMG-3622.png)
-![Themes](https://i.postimg.cc/hzRhfFkF/IMG-3623.png)
-![Locale](https://i.postimg.cc/w3H7zp5L/IMG-3624.png)
-![About](https://i.postimg.cc/75c5rJXZ/IMG-3625.png)
+[![Home](https://i.postimg.cc/rKwsdNPp/IMG-3620.png)](https://postimg.cc/rKwsdNPp)
+[![Preferences](https://i.postimg.cc/2bdyWcY1/IMG-3621.png)](https://postimg.cc/2bdyWcY1)
+[![Dark mode](https://i.postimg.cc/fSwLfcWB/IMG-3622.png)](https://postimg.cc/fSwLfcWB)
+[![Themes](https://i.postimg.cc/hzRhfFkF/IMG-3623.png)](https://postimg.cc/hzRhfFkF)
+[![Locale](https://i.postimg.cc/w3H7zp5L/IMG-3624.png)](https://postimg.cc/w3H7zp5L)
+[![About](https://i.postimg.cc/75c5rJXZ/IMG-3625.png)](https://postimg.cc/75c5rJXZ)
 
 ## Getting Started
 
