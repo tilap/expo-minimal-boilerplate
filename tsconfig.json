@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "jsx": "react-native",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strict": false,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@config": ["src/config/index"],
+      "@contexts/*": ["src/contexts/*"],
+      "@lib/*": ["src/lib/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@screens/*": ["src/screens/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["src/**/*", "custom.d.ts"],
+  "exclude": ["node_modules"],
+  "extends": "expo/tsconfig.base"
+}

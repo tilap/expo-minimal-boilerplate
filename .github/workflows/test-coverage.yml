@@ -1,0 +1,50 @@
+name: Test Coverage 🧪📊
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code 📥
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc 📄
+        id: nvmrc
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      - name: Set up Node.js 🌐
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies 📦
+        run: yarn install
+
+      - name: Run tests and generate coverage 🏃‍♂️💻
+        run: yarn test --coverage
+
+      - name: Write coverage to a separate file 📝
+        run: |
+          # Extract coverage percentage from the coverage report
+          COVERAGE=$(grep -oP 'All files\s+\|\s+\K[0-9]+(\.[0-9]+)?(?=%)' coverage/lcov.info | head -n 1)
+          # Write coverage to a separate file
+          echo "## Test Coverage\n\nCoverage: $COVERAGE%" > coverage_report.md
+          # Commit the changes
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add coverage_report.md
+          git commit -m "Update coverage report: $COVERAGE%"
+          git push
+
+      - name: Clean up 🧹
+        run: |
+          # Clean up the coverage folder if needed
+          rm -rf coverage
