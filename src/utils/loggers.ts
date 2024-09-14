@@ -7,5 +7,7 @@ const config: configLoggerType = {
 
 const log = logger.createLogger(config);
 
+export type Logger = typeof log;
+
 export const root = log.extend("ROOT");
 export const lib = log.extend("LIB");
