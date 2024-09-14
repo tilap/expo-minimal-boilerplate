@@ -76,7 +76,8 @@ module.exports = {
         vars: "all",
         args: "after-used",
         ignoreRestSiblings: true,
-        varsIgnorePattern: "^_", // Ignore variables that start with an underscore
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
       },
     ],
 
@@ -88,4 +89,12 @@ module.exports = {
 
     "prettier/prettier": "error",
   },
+  overrides: [
+    {
+      files: ["**/*.test.ts", "**/*.spec.ts"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off", // Disable the rule for test files
+      },
+    },
+  ],
 };

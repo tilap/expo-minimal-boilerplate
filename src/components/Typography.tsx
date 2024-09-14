@@ -51,13 +51,13 @@ const variantsStyles = StyleSheet.create<Record<string, TextStyle>>({
   },
 });
 
-interface TypographyProps extends BoxStyleProps {
+type TypographyProps = BoxStyleProps & {
   variant?: TypographyVariant;
   align?: TypographyAlignment;
   style?: TextStyle | TextStyle[];
   children: React.ReactNode;
   palette?: Palette;
-}
+};
 
 export const Typography = withBoxStyle(
   ({ variant = "text", align = "start", children, style, palette = "text" }: TypographyProps) => {

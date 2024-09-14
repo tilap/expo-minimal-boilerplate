@@ -8,8 +8,16 @@ import { Typography } from "@components/Typography";
 import { DarkMode, useDarkmode, useSetDarkmode } from "@contexts/darkmode";
 import { useT } from "@contexts/i18n/index";
 import React from "react";
+import { TextStyle, ViewStyle } from "react-native";
 
-const iconMap: Record<DarkMode, any> = {
+const iconMap: Record<
+  DarkMode,
+  React.ComponentType<{
+    size?: number | undefined;
+    color?: string | undefined;
+    style?: ViewStyle | TextStyle | undefined;
+  }>
+> = {
   dark: DarkmodeDarkIcon,
   light: DarkmodeLightIcon,
   system: DarkmmodeAutomaticIcon,
