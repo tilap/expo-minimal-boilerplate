@@ -33,15 +33,29 @@ jobs:
 
       - name: Write coverage to a separate file 📝
         run: |
-          # Extract coverage percentage from the coverage report
           COVERAGE=$(grep -oP 'All files\s+\|\s+\K[0-9]+(\.[0-9]+)?(?=%)' coverage/lcov.info | head -n 1)
-          # Write coverage to a separate file
-          echo "## Test Coverage\n\nCoverage: $COVERAGE%" > coverage_report.md
-          # Commit the changes
+          TOTAL_TESTS=$(grep -oP 'Tests\s+\|\s+\K[0-9]+' coverage/lcov.info | head -n 1)
+          PASSED_TESTS=$(grep -oP 'Passes\s+\|\s+\K[0-9]+' coverage/lcov.info | head -n 1)
+          DATE=$(date +"%Y-%m-%d %H:%M:%S")
+
+          echo "## Test Coverage Report 📝" > COVERAGE.md
+          echo "" >> COVERAGE.md
+          echo "Date: $DATE" >> COVERAGE.md
+          echo "" >> COVERAGE.md
+          echo "Total Tests: $TOTAL_TESTS" >> COVERAGE.md
+          echo "Passed Tests: $PASSED_TESTS" >> COVERAGE.md
+          echo "Overall Coverage: $COVERAGE%" >> COVERAGE.md
+          echo "" >> COVERAGE.md
+          echo "### File Coverage Details:" >> COVERAGE.md
+          echo "" >> COVERAGE.md
+          
+          grep -E '^\s+\S+\s+\|\s+\d+(\.\d+)?%' coverage/lcov.info >> COVERAGE.md
+          echo "" >> COVERAGE.md  # Add a blank line at the end
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add coverage_report.md
-          git commit -m "Update coverage report: $COVERAGE%"
+          git add COVERAGE.md
+          git commit -m "docs: update coverage report: $COVERAGE%"
           git push
 
       - name: Clean up 🧹
