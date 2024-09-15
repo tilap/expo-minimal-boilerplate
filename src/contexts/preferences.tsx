@@ -14,13 +14,16 @@ type StorageData = {
   themeVariant: Context["themeVariant"];
 };
 
-type Context = {
+type PreferencesState = {
   darkMode: DarkMode | null;
-  setDarkMode: (_mode: DarkMode) => void;
   locale: Locale | null;
-  setLocale: (_loc: Locale) => void;
   themeVariant: ThemeVariant | null;
-  setThemeVariant: (_v: ThemeVariant) => void;
+};
+
+type Context = PreferencesState & {
+  setDarkMode: (mode: DarkMode) => void;
+  setLocale: (loc: Locale) => void;
+  setThemeVariant: (v: ThemeVariant) => void;
   isLoading: boolean;
 };
 
@@ -30,64 +33,65 @@ export function PreferencesProvider({
   children,
   storage,
 }: React.PropsWithChildren<{ storage?: IStorage<StorageData> }>) {
-  const [darkMode, _setDarkMode] = useState<DarkMode | null>(null);
-  const [locale, _setLocale] = useState<Locale | null>(null);
-  const [themeVariant, _setThemeVariant] = useState<ThemeVariant | null>(null);
+  const [preferences, setPreferences] = useState<PreferencesState>({
+    darkMode: null,
+    locale: null,
+    themeVariant: null,
+  });
   const [isLoading, setIsLoading] = useState(true);
 
-  const setDarkMode = useCallback(
-    (mode: string, update = true) => {
-      const newMode = darkModes.includes(mode as DarkMode) ? (mode as DarkMode) : null;
-      _setDarkMode(newMode);
-      update && storage && storage.set({ locale, darkMode: newMode, themeVariant });
+  const updatePreferences = useCallback(
+    (newPrefs: Partial<PreferencesState>) => {
+      setPreferences((prev) => {
+        const updatedPreferences = { ...prev, ...newPrefs };
+        if (storage) {
+          storage.set(updatedPreferences);
+        }
+        return updatedPreferences;
+      });
     },
-    [locale, storage, themeVariant],
+    [storage],
   );
 
-  const setLocale = useCallback(
-    (loc: string, update = true) => {
-      const newLocale = locales.includes(loc as Locale) ? (loc as Locale) : null;
-      _setLocale(newLocale);
-      update && storage && storage.set({ locale: newLocale, darkMode, themeVariant });
-    },
-    [darkMode, storage, themeVariant],
-  );
+  const setDarkMode = (mode: string) => {
+    const newMode = darkModes.includes(mode as DarkMode) ? (mode as DarkMode) : null;
+    updatePreferences({ darkMode: newMode });
+  };
 
-  const setThemeVariant = useCallback(
-    (v: string, update = true) => {
-      const newVariant = themeVariants.includes(v as ThemeVariant) ? (v as ThemeVariant) : null;
-      _setThemeVariant(newVariant);
-      update && storage && storage.set({ locale, darkMode, themeVariant: newVariant });
-    },
-    [darkMode, locale, storage],
-  );
+  const setLocale = (loc: string) => {
+    const newLocale = locales.includes(loc as Locale) ? (loc as Locale) : null;
+    updatePreferences({ locale: newLocale });
+  };
+
+  const setThemeVariant = (v: string) => {
+    const newVariant = themeVariants.includes(v as ThemeVariant) ? (v as ThemeVariant) : null;
+    updatePreferences({ themeVariant: newVariant });
+  };
 
   useEffect(() => {
     if (storage) {
-      storage
-        .get()
-        .then((store) => {
-          if (store) {
-            if (store.darkMode && typeof store.darkMode === "string") {
-              setDarkMode(store.darkMode, false);
-            }
-            if (store.locale && typeof store.locale === "string") {
-              setLocale(store.locale, false);
-            }
-            if (store.themeVariant && typeof store.themeVariant === "string") {
-              setThemeVariant(store.themeVariant, false);
-            }
-          }
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+      storage.get().then((store) => {
+        if (store) {
+          updatePreferences({
+            darkMode: store.darkMode || null,
+            locale: store.locale || null,
+            themeVariant: store.themeVariant || null,
+          });
+        }
+        setIsLoading(false);
+      });
     }
-  }, [setDarkMode, setLocale, setThemeVariant, storage]);
+  }, [storage, updatePreferences]);
 
   return (
     <PreferencesContext.Provider
-      value={{ darkMode, setDarkMode, locale, setLocale, themeVariant, setThemeVariant, isLoading }}
+      value={{
+        ...preferences,
+        setDarkMode,
+        setLocale,
+        setThemeVariant,
+        isLoading,
+      }}
     >
       {children}
     </PreferencesContext.Provider>
