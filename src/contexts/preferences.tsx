@@ -1,101 +1,34 @@
-import { type DarkMode, darkModes } from "@contexts/darkmode";
-import { type Locale, locales } from "@contexts/i18n";
-import { type ThemeVariant, themeVariants } from "@contexts/theme";
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { type DarkMode } from "@contexts/darkmode";
+import { type Locale } from "@contexts/i18n";
+import { type ThemeVariant } from "@contexts/theme";
+import React, { createContext, useContext } from "react";
 
-interface IStorage<T> {
-  get(): Promise<T | null>;
-  set(_data: T): Promise<boolean>;
-}
-
-type StorageData = {
-  locale: Context["locale"];
-  darkMode: Context["darkMode"];
-  themeVariant: Context["themeVariant"];
-};
-
-type PreferencesState = {
+type Store = {
   darkMode: DarkMode | null;
   locale: Locale | null;
   themeVariant: ThemeVariant | null;
+  loading: boolean;
+  setDarkMode: (mode: DarkMode | null) => void;
+  setLocale: (loc: Locale | null) => void;
+  setThemeVariant: (v: ThemeVariant | null) => void;
+  getPreferences: () => PreferencesState | null;
 };
 
-type Context = PreferencesState & {
-  setDarkMode: (mode: DarkMode) => void;
-  setLocale: (loc: Locale) => void;
-  setThemeVariant: (v: ThemeVariant) => void;
-  isLoading: boolean;
-};
+type PreferencesState = Pick<Store, "darkMode" | "locale" | "themeVariant">;
+
+type Context = Omit<Store, "getPreferences">;
 
 export const PreferencesContext = createContext<Context>({} as unknown as Context);
 
 export function PreferencesProvider({
   children,
-  storage,
-}: React.PropsWithChildren<{ storage?: IStorage<StorageData> }>) {
-  const [preferences, setPreferences] = useState<PreferencesState>({
-    darkMode: null,
-    locale: null,
-    themeVariant: null,
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  store,
+}: React.PropsWithChildren<{
+  store: Store;
+}>) {
+  const { getPreferences: _, ...context } = store; // Use injected store
 
-  const updatePreferences = useCallback(
-    (newPrefs: Partial<PreferencesState>) => {
-      setPreferences((prev) => {
-        const updatedPreferences = { ...prev, ...newPrefs };
-        if (storage) {
-          storage.set(updatedPreferences);
-        }
-        return updatedPreferences;
-      });
-    },
-    [storage],
-  );
-
-  const setDarkMode = (mode: string) => {
-    const newMode = darkModes.includes(mode as DarkMode) ? (mode as DarkMode) : null;
-    updatePreferences({ darkMode: newMode });
-  };
-
-  const setLocale = (loc: string) => {
-    const newLocale = locales.includes(loc as Locale) ? (loc as Locale) : null;
-    updatePreferences({ locale: newLocale });
-  };
-
-  const setThemeVariant = (v: string) => {
-    const newVariant = themeVariants.includes(v as ThemeVariant) ? (v as ThemeVariant) : null;
-    updatePreferences({ themeVariant: newVariant });
-  };
-
-  useEffect(() => {
-    if (storage) {
-      storage.get().then((store) => {
-        if (store) {
-          updatePreferences({
-            darkMode: store.darkMode || null,
-            locale: store.locale || null,
-            themeVariant: store.themeVariant || null,
-          });
-        }
-        setIsLoading(false);
-      });
-    }
-  }, [storage, updatePreferences]);
-
-  return (
-    <PreferencesContext.Provider
-      value={{
-        ...preferences,
-        setDarkMode,
-        setLocale,
-        setThemeVariant,
-        isLoading,
-      }}
-    >
-      {children}
-    </PreferencesContext.Provider>
-  );
+  return <PreferencesContext.Provider value={context}>{children}</PreferencesContext.Provider>;
 }
 
 export function usePreferences() {
