@@ -2,10 +2,7 @@ import { type DarkMode, darkModes } from "@contexts/darkmode";
 import { type Locale, locales } from "@contexts/i18n";
 import { type ThemeVariant, themeVariants } from "@contexts/theme";
 import { type IStorage } from "@lib/storage";
-import { Storage } from "@lib/storage";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-
-export const preferencesStorage = new Storage<StorageData>("Preferences");
 
 type StorageData = {
   locale: Context["locale"];
