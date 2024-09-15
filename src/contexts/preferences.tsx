@@ -1,12 +1,8 @@
 import { type DarkMode, darkModes } from "@contexts/darkmode";
 import { type Locale, locales } from "@contexts/i18n";
 import { type ThemeVariant, themeVariants } from "@contexts/theme";
+import { type IStorage } from "@lib/storage";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-
-interface IStorage<T> {
-  get(): Promise<T | null>;
-  set(_data: T): Promise<boolean>;
-}
 
 type StorageData = {
   locale: Context["locale"];
