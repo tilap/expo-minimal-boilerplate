@@ -39,3 +39,5 @@ export class Storage<Data extends Obj | Obj[]> {
     }
   }
 }
+
+export type IStorage<Data extends Obj | Obj[]> = Storage<Data>;
