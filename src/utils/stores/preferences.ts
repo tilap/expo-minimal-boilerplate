@@ -17,19 +17,13 @@ type PreferencesState = {
   setDarkMode: (mode: DarkMode | null) => void;
   setLocale: (loc: Locale | null) => void;
   setThemeVariant: (v: ThemeVariant | null) => void;
-
-  getPreferences: () => {
-    darkMode: DarkMode | null;
-    locale: Locale | null;
-    themeVariant: ThemeVariant | null;
-  };
 };
 
 const storage = createAsyncPersistStorage<PreferencesState>();
 
 export const usePreferencesStore = create<PreferencesState>()(
   persist<PreferencesState>(
-    (set, get) => ({
+    (set) => ({
       darkMode: null,
       locale: null,
       themeVariant: null,
@@ -38,11 +32,6 @@ export const usePreferencesStore = create<PreferencesState>()(
       setDarkMode: (darkMode: DarkMode) => set({ darkMode }),
       setLocale: (locale: Locale) => set({ locale }),
       setThemeVariant: (v: ThemeVariant | null) => set({ themeVariant: v }),
-      getPreferences: () => ({
-        darkMode: get().darkMode,
-        locale: get().locale,
-        themeVariant: get().themeVariant,
-      }),
     }),
     {
       name: config.stores.preferences.name,
