@@ -6,9 +6,9 @@ import { type Locale, locales } from "@contexts/i18n";
 import { I18nProvider } from "@contexts/i18n";
 import { PreferencesContext, PreferencesProvider } from "@contexts/preferences";
 import { ThemeProvider } from "@contexts/theme";
+import { usePreferencesStore } from "@utils/stores/preferences";
 import * as Localization from "expo-localization";
 import React from "react";
-import { usePreferencesStore } from "src/stores/preferences";
 
 const deviceLanguage = Localization.getLocales()?.[0]?.languageCode as unknown as Locale;
 
