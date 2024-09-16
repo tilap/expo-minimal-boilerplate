@@ -1,10 +1,10 @@
+import config from "@config";
 import { type DarkMode } from "@contexts/darkmode";
 import { type Locale } from "@contexts/i18n";
 import { type ThemeVariant } from "@contexts/theme";
 import { createAsyncPersistStorage } from "@lib/zustand/createAsyncPersistStorage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import config from "@config";
 
 type PreferencesState = {
   loading: boolean;

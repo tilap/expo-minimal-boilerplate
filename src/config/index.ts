@@ -19,12 +19,11 @@ const config = {
     debugScreen: process.env.NODE_ENV === "development",
   },
   ui: {
-    // Changing that requires to update the `app.config.ts` > `orientation`
-    lockScreenOrientation: OrientationLock.PORTRAIT_UP,
+    lockScreenOrientation: OrientationLock.PORTRAIT_UP, // Changing it requires to update the `app.config.ts` > `orientation`
   },
   urls: {
-    privacy: "https://unsplash.com/",
-    terms: "https://codepen.io/",
+    privacy: "https://unsplash.com/", // leave empty to hide the screen
+    terms: "https://codepen.io/", // leave empty to hide the screen
   },
 } as const;
 
