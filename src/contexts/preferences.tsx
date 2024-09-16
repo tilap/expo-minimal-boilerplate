@@ -26,7 +26,7 @@ export function PreferencesProvider({
 }: React.PropsWithChildren<{
   store: Store;
 }>) {
-  const { getPreferences: _, ...context } = store; // Use injected store
+  const { getPreferences: _, ...context } = store;
 
   return <PreferencesContext.Provider value={context}>{children}</PreferencesContext.Provider>;
 }
