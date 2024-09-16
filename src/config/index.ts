@@ -23,8 +23,8 @@ const config = {
     lockScreenOrientation: OrientationLock.PORTRAIT_UP,
   },
   urls: {
-    privacy: "https://www.devpulsion.com/",
-    terms: "https://audiax.net",
+    privacy: "https://unsplash.com/",
+    terms: "https://codepen.io/",
   },
 } as const;
 
