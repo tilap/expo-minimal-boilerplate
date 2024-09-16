@@ -27,7 +27,7 @@ export function ThemeProvider({
   darkMode: DarkMode;
   defaultThemeVariant: ThemeVariant;
   initialThemeVariant: ThemeVariant | null;
-  onThemeVariantChange?: (_v: string) => void;
+  onThemeVariantChange?: (_v: string | null) => void;
 }>) {
   const [themeVariant, _setThemeVariant] = useState<ThemeVariant>(
     initialThemeVariant || defaultThemeVariant,

@@ -12,16 +12,18 @@ const config = {
   defaultLocale,
   defaultDarkMode,
   defaultThemeVariant,
+  stores: {
+    preferences: { name: "preferences-store" },
+  },
   featureFlags: {
-    debugScreen: true,
+    debugScreen: process.env.NODE_ENV === "development",
   },
   ui: {
-    // Changing that requires to update the `app.config.ts` > `orientation`
-    lockScreenOrientation: OrientationLock.PORTRAIT_UP,
+    lockScreenOrientation: OrientationLock.PORTRAIT_UP, // Changing it requires to update the `app.config.ts` > `orientation`
   },
   urls: {
-    privacy: "https://www.devpulsion.com/",
-    terms: "https://audiax.net",
+    privacy: "https://unsplash.com/", // leave empty to hide the screen
+    terms: "https://codepen.io/", // leave empty to hide the screen
   },
 } as const;
 

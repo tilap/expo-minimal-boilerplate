@@ -1,25 +1,27 @@
 import config from "@config";
+import { AppLoaderProvider } from "@contexts/app-loader";
+import { ConfigProvider } from "@contexts/config";
 import { DarkmodeContext, DarkmodeProvider } from "@contexts/darkmode";
 import { type Locale, locales } from "@contexts/i18n";
+import { I18nProvider } from "@contexts/i18n";
+import { PreferencesContext, PreferencesProvider } from "@contexts/preferences";
 import { ThemeProvider } from "@contexts/theme";
-import { preferencesStorage } from "@utils/storages/preferences";
+import { usePreferencesStore } from "@utils/stores/preferences";
 import * as Localization from "expo-localization";
 import React from "react";
-import { AppLoaderProvider } from "../contexts/app-loader";
-import { ConfigProvider } from "../contexts/config";
-import { I18nProvider } from "../contexts/i18n";
-import { PreferencesContext, PreferencesProvider } from "../contexts/preferences";
 
 const deviceLanguage = Localization.getLocales()?.[0]?.languageCode as unknown as Locale;
 
 export function AppProviders({ children }: React.PropsWithChildren) {
+  const preferencesStore = usePreferencesStore();
+
   return (
     <ConfigProvider config={config}>
-      <PreferencesProvider storage={preferencesStorage}>
+      <PreferencesProvider store={preferencesStore}>
         <PreferencesContext.Consumer>
           {(preferences) => {
             return (
-              <AppLoaderProvider forceLoadingState={preferences.isLoading}>
+              <AppLoaderProvider forceLoadingState={preferences.loading}>
                 <I18nProvider
                   defaultLocale={
                     locales.includes(deviceLanguage) ? deviceLanguage : config.defaultLocale

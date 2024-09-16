@@ -1,7 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+type StorePrimitives = string | boolean | number | null;
+
 type Obj = {
-  [key: string]: string | boolean | number | null | Obj;
+  [key: string]: StorePrimitives | Obj | (StorePrimitives | Obj)[];
 };
 
 export class Storage<Data extends Obj | Obj[]> {
@@ -24,7 +26,7 @@ export class Storage<Data extends Obj | Obj[]> {
   async get(): Promise<Data | null> {
     try {
       const value = await AsyncStorage.getItem(this.key);
-      return value === null ? null : JSON.parse(value);
+      return value === null ? null : (JSON.parse(value) as Data);
     } catch {
       return null;
     }
@@ -39,3 +41,5 @@ export class Storage<Data extends Obj | Obj[]> {
     }
   }
 }
+
+export type IStorage<Data extends Obj | Obj[]> = Storage<Data>;
