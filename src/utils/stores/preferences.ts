@@ -4,6 +4,7 @@ import { type ThemeVariant } from "@contexts/theme";
 import { createAsyncPersistStorage } from "@lib/zustand/createAsyncPersistStorage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import config from "@config";
 
 type PreferencesState = {
   loading: boolean;
@@ -44,7 +45,7 @@ export const usePreferencesStore = create<PreferencesState>()(
       }),
     }),
     {
-      name: "preferences-store", // TODO: namespace from version
+      name: config.stores.preferences.name,
       storage,
       onRehydrateStorage: (state) => (newState) => {
         if (state) {

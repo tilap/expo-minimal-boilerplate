@@ -12,8 +12,11 @@ const config = {
   defaultLocale,
   defaultDarkMode,
   defaultThemeVariant,
+  stores: {
+    preferences: { name: "preferences-store" },
+  },
   featureFlags: {
-    debugScreen: true,
+    debugScreen: process.env.NODE_ENV === "development",
   },
   ui: {
     // Changing that requires to update the `app.config.ts` > `orientation`
