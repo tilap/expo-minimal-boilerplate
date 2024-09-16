@@ -11,12 +11,9 @@ type Store = {
   setDarkMode: (mode: DarkMode | null) => void;
   setLocale: (loc: Locale | null) => void;
   setThemeVariant: (v: ThemeVariant | null) => void;
-  getPreferences: () => PreferencesState | null;
 };
 
-type PreferencesState = Pick<Store, "darkMode" | "locale" | "themeVariant">;
-
-type Context = Omit<Store, "getPreferences">;
+type Context = Store;
 
 export const PreferencesContext = createContext<Context>({} as unknown as Context);
 
@@ -26,7 +23,7 @@ export function PreferencesProvider({
 }: React.PropsWithChildren<{
   store: Store;
 }>) {
-  const { getPreferences: _, ...context } = store;
+  const { ...context } = store;
 
   return <PreferencesContext.Provider value={context}>{children}</PreferencesContext.Provider>;
 }
