@@ -49,3 +49,10 @@ export const usePreferencesStore = create<PreferencesState & PreferencesActions>
     },
   ),
 );
+
+export const usePreferences = (): Omit<PreferencesState, "initialized"> =>
+  usePreferencesStore(({ darkMode, locale, themeVariant }) => ({
+    darkMode,
+    locale,
+    themeVariant,
+  }));
