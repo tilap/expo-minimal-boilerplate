@@ -7,39 +7,44 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type PreferencesState = {
-  loading: boolean;
-
+  initialized: boolean;
   darkMode: DarkMode | null;
   locale: Locale | null;
   themeVariant: ThemeVariant | null;
+};
 
-  setLoading: (loading: boolean) => void;
+type PreferencesActions = {
   setDarkMode: (mode: DarkMode | null) => void;
   setLocale: (loc: Locale | null) => void;
   setThemeVariant: (v: ThemeVariant | null) => void;
+
+  setInitialized: () => void;
 };
 
 const storage = createAsyncPersistStorage<PreferencesState>();
 
-export const usePreferencesStore = create<PreferencesState>()(
-  persist<PreferencesState>(
+export const usePreferencesStore = create<PreferencesState & PreferencesActions>()(
+  persist(
     (set) => ({
+      initialized: false,
       darkMode: null,
       locale: null,
       themeVariant: null,
-      loading: true,
-      setLoading: (loading: boolean) => set({ loading }),
       setDarkMode: (darkMode: DarkMode) => set({ darkMode }),
       setLocale: (locale: Locale) => set({ locale }),
       setThemeVariant: (v: ThemeVariant | null) => set({ themeVariant: v }),
+      setInitialized: () => set({ initialized: true }),
     }),
     {
       name: config.stores.preferences.name,
       storage,
-      onRehydrateStorage: (state) => (newState) => {
-        if (state) {
-          newState?.setLoading(false);
-        }
+      onRehydrateStorage: (state) => {
+        return (newState) => {
+          if (state && newState) {
+            newState.setInitialized();
+          }
+          return newState;
+        };
       },
     },
   ),
