@@ -14,10 +14,11 @@ import { PersistStorage, StorageValue } from "zustand/middleware";
  * import { PersistStorage, StorageValue } from "zustand/middleware";
  *
  * type State = {};
+ * type Store = {};
  *
  * const storage = createAsyncPersistStorage<State>();
  *
- * export const usePreferencesStore = create<State>()(
+ * export const usePreferencesStore = create<Store>()(
  *   persist<State>(
  *     (set, get) => (...),
  *     {
