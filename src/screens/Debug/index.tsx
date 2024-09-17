@@ -3,7 +3,7 @@ import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
 import { useConfig } from "@contexts/config";
-import { usePreferences } from "@contexts/preferences";
+import { usePreferences } from "@utils/stores/preferences";
 import React from "react";
 
 export function Debug() {
