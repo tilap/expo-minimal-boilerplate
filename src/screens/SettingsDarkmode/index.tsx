@@ -29,7 +29,7 @@ export function SettingsDarkmode() {
   const t = useT();
 
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Paper>
         <List
           items={(["dark", "light", "system"] as DarkMode[]).map((v) => (

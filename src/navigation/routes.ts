@@ -4,7 +4,6 @@ export enum Routes {
   Debug = "Debug",
   Home = "Home",
   LegalWebview = "LegalWebview",
-  PermissionsRequired = "PermissionsRequired",
   Settings = "Settings",
   SettingsDarkmode = "SettingsDarkmode",
   SettingsLocale = "SettingsLocale",
@@ -15,7 +14,6 @@ type LegalWebviewType = "privacy" | "terms";
 
 export type RootStackParams = {
   [Routes.App]: undefined;
-  [Routes.PermissionsRequired]: undefined;
 };
 
 export type AppStackParams = {

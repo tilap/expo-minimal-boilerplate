@@ -13,7 +13,7 @@ export function SettingsThemeVariant() {
   const t = useT();
 
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Paper>
         <List
           items={themeVariants.map((v) => (

@@ -32,7 +32,7 @@ export function Settings() {
   const gotoSettingsThemeVariant = useGoToSettingsThemeVariant();
 
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Paper mb={2}>
         <List
           items={[
