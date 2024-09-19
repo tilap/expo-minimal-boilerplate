@@ -14,7 +14,7 @@ export function SettingsLocale() {
   const t = useT();
 
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Paper>
         <List
           items={locales.map((v) => (

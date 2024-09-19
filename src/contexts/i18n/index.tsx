@@ -18,7 +18,7 @@ type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
 
-type TypedScope = NestedKeyOf<Dictionary>;
+export type TypedScope = NestedKeyOf<Dictionary>;
 
 type Context = {
   locale: Locale;
