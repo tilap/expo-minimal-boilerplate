@@ -14,7 +14,7 @@ export function About() {
   const gotoLegal = useGoToLegalWebview();
   const urls = useUrls();
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Paper>
         <List
           items={[

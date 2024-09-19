@@ -49,7 +49,7 @@ export function LegalWebview() {
   return (
     <ScreenContainer preset="full" style={styles.container}>
       {(isLoading || hasError) && (
-        <Box flex={1} alignItems="center" justifyContent="center">
+        <Box flex={1} alignItems="center" justifyContent="center" fullWidth>
           {isLoading && (
             <>
               <ActivityIndicator size="large" />

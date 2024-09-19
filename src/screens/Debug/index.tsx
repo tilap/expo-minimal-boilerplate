@@ -10,7 +10,7 @@ export function Debug() {
   const config = useConfig();
   const preferences = usePreferences();
   return (
-    <ScreenContainer preset="page">
+    <ScreenContainer preset="page" withScrollView>
       <Box p={2}>
         <Typography variant="h3">Configuration</Typography>
       </Box>
