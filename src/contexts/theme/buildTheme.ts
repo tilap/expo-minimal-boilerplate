@@ -96,6 +96,8 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
   };
 
   const theme = {
+    darkMode: darkMode === "dark",
+
     navigation,
     screenOptions,
     StatusBar,
