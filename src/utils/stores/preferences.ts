@@ -56,7 +56,8 @@ export const useCorePreferences = (): Pick<
   "darkMode" | "locale" | "themeVariant" | "initialized"
 > &
   Pick<PreferencesActions, "setDarkMode" | "setLocale" | "setThemeVariant"> => {
-  return usePreferencesStore((store) => ({
+  const store = usePreferencesStore();
+  return {
     darkMode: store.darkMode,
     initialized: store.initialized,
     locale: store.locale,
@@ -64,5 +65,5 @@ export const useCorePreferences = (): Pick<
     setDarkMode: store.setDarkMode,
     setLocale: store.setLocale,
     setThemeVariant: store.setThemeVariant,
-  }));
+  };
 };
