@@ -30,6 +30,8 @@ export const usePreferencesStore = create<PreferencesState & PreferencesActions>
       darkMode: null,
       locale: null,
       themeVariant: null,
+      uiExpandStats: true,
+      setUiExpandStats: (expand: boolean) => set({ uiExpandStats: expand }),
       setDarkMode: (darkMode: DarkMode) => set({ darkMode }),
       setLocale: (locale: Locale) => set({ locale }),
       setThemeVariant: (v: ThemeVariant | null) => set({ themeVariant: v }),
@@ -50,11 +52,13 @@ export const usePreferencesStore = create<PreferencesState & PreferencesActions>
   ),
 );
 
-export const usePreferences = (): Omit<PreferencesState, "initialized"> => {
-  const store = usePreferencesStore();
-  return {
+export const usePreferences = (): Pick<
+  PreferencesState,
+  "darkMode" | "locale" | "themeVariant"
+> => {
+  return usePreferencesStore((store) => ({
     darkMode: store.darkMode,
     locale: store.locale,
     themeVariant: store.themeVariant,
-  };
+  }));
 };
