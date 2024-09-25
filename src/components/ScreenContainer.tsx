@@ -3,7 +3,16 @@ import { SafeAreaView, StyleSheet, ViewStyle } from "react-native";
 import { Box } from "./Box";
 import { ExtendedScrollView } from "./ExtendedScrollView";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
 const presetStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   page: {
     display: "flex",
     flex: 1,
@@ -35,7 +44,7 @@ export function ScreenContainer({
   const content = <Box style={[presetStyles[preset], style]}>{children}</Box>;
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       {withScrollView ? <ExtendedScrollView fullWidth>{content}</ExtendedScrollView> : content}
     </SafeAreaView>
   );
