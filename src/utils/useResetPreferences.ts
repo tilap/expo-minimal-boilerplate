@@ -8,11 +8,11 @@ export function useResetPreferences() {
   const resetThemeVariant = useResetThemeVariant();
   const resetDarkMode = useResetDarkmode();
 
-  const cleanAppData = useCallback(() => {
+  const resetPreferences = useCallback(() => {
     resetLocale();
     resetThemeVariant();
     resetDarkMode();
   }, [resetLocale, resetThemeVariant, resetDarkMode]);
 
-  return cleanAppData;
+  return resetPreferences;
 }
