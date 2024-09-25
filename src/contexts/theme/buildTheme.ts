@@ -115,15 +115,17 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
         container: {
           backgroundColor: palette.surface,
         },
-        label: {
-          color: palette.text,
-        },
         value: {
           color: palette.subtle,
         },
         icon: {
           default: { color: palette.subtle },
           highlight: { color: palette.navigation },
+        },
+      },
+      ListEntryText: {
+        label: {
+          color: palette.text,
         },
       },
       NavbarIconButton: {

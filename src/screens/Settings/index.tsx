@@ -1,7 +1,7 @@
 import { Box } from "@components/Box";
 import { StartToEndIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
@@ -36,19 +36,19 @@ export function Settings() {
       <Paper mb={2}>
         <List
           items={[
-            <ListEntryGeneric
+            <ListEntryText
               label={t("screens.settings.options.darkmode.label")}
               value={t(`screens.settings.options.darkmode.values.${darkMode}`)}
               onPress={goToSettingsDarkmode}
               Icon={StartToEndIcon}
             />,
-            <ListEntryGeneric
+            <ListEntryText
               label={t("screens.settings.options.themeVariant.label")}
               value={t(`screens.settings.options.themeVariant.values.${themeVariant}`)}
               onPress={gotoSettingsThemeVariant}
               Icon={StartToEndIcon}
             />,
-            <ListEntryGeneric
+            <ListEntryText
               label={t("screens.settings.options.locale.label")}
               value={t(`screens.settings.options.locale.values.${locale as "fr" | "en"}`)}
               onPress={goToSettingsLocale}
@@ -67,7 +67,7 @@ export function Settings() {
       <Paper mb={0}>
         <List
           items={[
-            <ListEntryGeneric
+            <ListEntryText
               label={t("screens.settings.options.about.label")}
               onPress={gotoAbout}
               Icon={StartToEndIcon}
@@ -80,7 +80,7 @@ export function Settings() {
         <Paper mt={8}>
           <List
             items={[
-              <ListEntryGeneric
+              <ListEntryText
                 label={t("screens.settings.options.debug.label")}
                 onPress={gotoDebug}
                 Icon={StartToEndIcon}

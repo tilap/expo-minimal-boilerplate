@@ -1,7 +1,7 @@
 import { Box } from "@components/Box";
 import { DarkmmodeAutomaticIcon, DarkmodeDarkIcon, DarkmodeLightIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
@@ -33,7 +33,7 @@ export function SettingsDarkmode() {
       <Paper>
         <List
           items={(["dark", "light", "system"] as DarkMode[]).map((v) => (
-            <ListEntryGeneric
+            <ListEntryText
               label={t(`screens.settingsDarkmode.options.${v}`)}
               onPress={() => {
                 setDarkMode(v);

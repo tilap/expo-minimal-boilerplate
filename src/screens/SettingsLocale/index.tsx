@@ -1,6 +1,6 @@
 import { CheckmarkIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { useLocale, useLocales, useSetLocale, useT } from "@contexts/i18n/index";
@@ -18,7 +18,7 @@ export function SettingsLocale() {
       <Paper>
         <List
           items={locales.map((v) => (
-            <ListEntryGeneric
+            <ListEntryText
               label={t(`screens.settingsLocale.options.${v}`)}
               onPress={() => {
                 setLocale(v);

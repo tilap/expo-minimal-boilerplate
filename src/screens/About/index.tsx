@@ -1,6 +1,6 @@
 import { StartToEndIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { useUrls } from "@contexts/config";
@@ -18,19 +18,19 @@ export function About() {
       <Paper>
         <List
           items={[
-            <ListEntryGeneric
+            <ListEntryText
               label={t("screens.about.entries.version.label")}
               value={getAppVersion() || "N/A"}
             />,
             urls.privacy && (
-              <ListEntryGeneric
+              <ListEntryText
                 label={t("screens.about.entries.privacy.label")}
                 onPress={() => gotoLegal("privacy")}
                 Icon={StartToEndIcon}
               />
             ),
             urls.terms && (
-              <ListEntryGeneric
+              <ListEntryText
                 label={t("screens.about.entries.terms.label")}
                 onPress={() => gotoLegal("terms")}
                 Icon={StartToEndIcon}
