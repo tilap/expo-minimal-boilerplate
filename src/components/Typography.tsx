@@ -7,7 +7,7 @@ type TypographyVariant = "h1" | "h2" | "h3" | "text" | "list" | "annotation";
 type TypographyAlignment = "start" | "center" | "end";
 type Palette = "text" | "primary" | "subtle" | "danger" | "navigation";
 
-enum FontFamily {
+export enum FontFamily {
   Light = "Light",
   Regular = "Regular",
   Bold = "Bold",
@@ -49,9 +49,13 @@ const variantsStyles = StyleSheet.create<Record<string, TextStyle>>({
     fontFamily: FontFamily.Regular,
     fontSize: 16,
   },
+  button: {
+    fontFamily: FontFamily.Bold,
+    fontSize: 16,
+  },
 });
 
-type TypographyProps = BoxStyleProps & {
+export type TypographyProps = BoxStyleProps & {
   variant?: TypographyVariant;
   align?: TypographyAlignment;
   style?: TextStyle | TextStyle[];

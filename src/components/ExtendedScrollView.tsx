@@ -3,9 +3,9 @@ import { type BoxStyleProps } from "@utils/boxStyles/useBoxStyle";
 import React from "react";
 import { ScrollView } from "react-native";
 
-export type BoxProps = BoxStyleProps;
+export type ExtendedScrollViewProps = BoxStyleProps;
 
-export const ExtendedScrollView = withBoxStyle((props: BoxProps) => {
+export const ExtendedScrollView = withBoxStyle((props: ExtendedScrollViewProps) => {
   const { style, ...rest } = props;
   return <ScrollView style={[style]} {...rest} />;
 });

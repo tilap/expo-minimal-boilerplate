@@ -21,16 +21,17 @@ const presetStyles = StyleSheet.create({
   },
 });
 
+export type ScreenContainerProps = React.PropsWithChildren<{
+  preset?: keyof typeof presetStyles;
+  style?: ViewStyle | ViewStyle[];
+  withScrollView?: boolean;
+}>;
 export function ScreenContainer({
   children,
   preset = "full",
   style,
   withScrollView = false,
-}: React.PropsWithChildren<{
-  preset?: keyof typeof presetStyles;
-  style?: ViewStyle | ViewStyle[];
-  withScrollView?: boolean;
-}>) {
+}: ScreenContainerProps) {
   const content = <Box style={[presetStyles[preset], style]}>{children}</Box>;
 
   return (

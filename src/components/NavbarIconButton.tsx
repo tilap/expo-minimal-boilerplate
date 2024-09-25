@@ -20,13 +20,11 @@ const styles = (theme: Theme) =>
     },
   });
 
-export function NavbarIconButton({
-  Icon,
-  onPress,
-}: {
+export type NavbarIconButtonProps = {
   onPress: () => void;
   Icon: React.ComponentType<GenericIconProps>;
-}) {
+};
+export function NavbarIconButton({ Icon, onPress }: NavbarIconButtonProps) {
   const theme = useTheme();
   const themedStyles = useThemedStyles<typeof styles>(styles);
 
