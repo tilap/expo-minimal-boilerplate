@@ -28,6 +28,14 @@ const presetStyles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  fullWithPadding: {
+    display: "flex",
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    paddingHorizontal: 4 * 4,
+    paddingVertical: 3 * 4,
+  },
 });
 
 export type ScreenContainerProps = React.PropsWithChildren<{
@@ -42,7 +50,6 @@ export function ScreenContainer({
   withScrollView = false,
 }: ScreenContainerProps) {
   const content = <Box style={[presetStyles[preset], style]}>{children}</Box>;
-
   return (
     <SafeAreaView style={styles.container}>
       {withScrollView ? <ExtendedScrollView fullWidth>{content}</ExtendedScrollView> : content}
