@@ -1,4 +1,4 @@
-import { I18n, TranslateOptions } from "i18n-js";
+import { type FormatNumberOptions, I18n } from "i18n-js";
 import moment from "moment";
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { type Dictionary } from "./dictionaries/en";
@@ -12,6 +12,11 @@ export type Locale = "fr" | "en";
 export const locales = ["en", "fr"] as Locale[];
 const dictionaries: Record<Locale, Dictionary> = { en, fr };
 
+const numberFormats: Record<Locale, Pick<FormatNumberOptions, "delimiter" | "separator">> = {
+  fr: { delimiter: " ", separator: "," },
+  en: { delimiter: ",", separator: "." },
+};
+
 type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
     ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
@@ -23,8 +28,8 @@ export type TypedScope = NestedKeyOf<Dictionary>;
 type Context = {
   locale: Locale;
   locales: Locale[];
-  t: (_key: TypedScope, _props?: TranslateOptions) => string;
   setLocale: (_locale: Locale) => void;
+  i18n: I18n;
 };
 
 const I18nContext = createContext<Context>(null as unknown as Context);
@@ -51,7 +56,6 @@ export function I18nProvider({
       }),
     [locale, defaultLocale],
   );
-  const t = (key: TypedScope, props?: TranslateOptions): string => i18n.t(key, props);
 
   return (
     <I18nContext.Provider
@@ -62,7 +66,7 @@ export function I18nProvider({
           _setLocale(loc);
           onLocaleChange?.(loc);
         },
-        t,
+        i18n,
       }}
     >
       {children}
@@ -74,22 +78,34 @@ function useI18n() {
   return useContext(I18nContext);
 }
 
-export const useT = () => {
-  const { t } = useI18n();
-  return t as (_key: TypedScope, _props?: TranslateOptions) => string;
-};
-
-export const useLocale = () => {
+export function useLocale() {
   const { locale } = useI18n();
   return locale;
-};
+}
 
-export const useLocales = () => {
+export function useLocales() {
   const context = useI18n();
   return context.locales;
-};
+}
 
-export const useSetLocale = () => {
+export function useSetLocale() {
   const { setLocale } = useI18n();
   return setLocale;
-};
+}
+
+// i18n binding
+export function useT(): I18n["t"] {
+  const { i18n } = useI18n();
+  return i18n.t.bind(i18n);
+}
+
+export function useFormatNumber(): (v: string | number) => string {
+  const { i18n, locale } = useI18n();
+  const format = i18n.numberToDelimited.bind(i18n);
+  return (v) => format(v, numberFormats[locale]);
+}
+
+export function useInterpolate(): I18n["interpolate"] {
+  const { i18n } = useI18n();
+  return i18n.interpolate.bind(i18n);
+}
