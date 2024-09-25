@@ -51,6 +51,15 @@ export const dictionary = {
           values: themeValues,
         },
         about: { label: "About" },
+        resetPreferences: {
+          label: "Reset all your preferences",
+          confirm: {
+            title: "Reset preferences",
+            message: "Are you sure you want to reset all your preferences?",
+            confirmLabel: "Reset",
+            cancelLabel: "Cancel",
+          },
+        },
         debug: { label: "Debug" },
       },
       acknoledgement:

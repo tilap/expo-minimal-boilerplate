@@ -11,6 +11,7 @@ type Context = {
   darkMode: DarkMode;
   resolvedDarkMode: ResolvedDarkMode;
   setDarkMode: (_mode: DarkMode) => void;
+  resetDarkMode: () => void; // Ajout de la fonction de réinitialisation
 };
 
 export const DarkmodeContext = React.createContext<Context>(null as unknown as Context);
@@ -48,12 +49,18 @@ export function DarkmodeProvider({
     onDarkmodeChange?.(newMode);
   }
 
+  function resetDarkMode() {
+    _setDarkMode(defaultMode);
+    onDarkmodeChange?.(defaultMode);
+  }
+
   return (
     <DarkmodeContext.Provider
       value={{
         darkMode,
         resolvedDarkMode,
         setDarkMode,
+        resetDarkMode, // Ajout de la fonction de réinitialisation au contexte
       }}
     >
       {children}
@@ -73,4 +80,9 @@ export function useDarkmode() {
 export function useSetDarkmode() {
   const { setDarkMode } = useDarkmodeContext();
   return setDarkMode;
+}
+
+export function useResetDarkmode() {
+  const { resetDarkMode } = useDarkmodeContext();
+  return resetDarkMode;
 }

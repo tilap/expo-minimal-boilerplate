@@ -1,6 +1,7 @@
 import { Box } from "@components/Box";
 import { StartToEndIcon } from "@components/Icon";
 import { List } from "@components/List";
+import { ListEntryGeneric } from "@components/ListEntryGeneric";
 import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
@@ -16,7 +17,9 @@ import {
   useGoToSettingsLocale,
   useGoToSettingsThemeVariant,
 } from "@navigation/helpers";
+import { useResetPreferences } from "@utils/useResetPreferences";
 import React from "react";
+import { Alert } from "react-native";
 
 export function Settings() {
   const locale = useLocale();
@@ -30,6 +33,21 @@ export function Settings() {
   const goToSettingsDarkmode = useGoToSettingsDarkmode();
   const goToSettingsLocale = useGoToSettingsLocale();
   const gotoSettingsThemeVariant = useGoToSettingsThemeVariant();
+  const resetPreferences = useResetPreferences();
+
+  const confirmClearDataAction = () =>
+    Alert.alert(
+      t("screens.settings.options.resetPreferences.confirm.title"),
+      t("screens.settings.options.resetPreferences.confirm.message"),
+      [
+        {
+          text: t("screens.settings.options.resetPreferences.confirm.cancelLabel"),
+          // onPress: () => clearAppData(),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => resetPreferences() },
+      ],
+    );
 
   return (
     <ScreenContainer preset="page" withScrollView>
@@ -64,7 +82,21 @@ export function Settings() {
         </Typography>
       </Box>
 
-      <Paper mb={0}>
+      {featureFlags.resetPreferences && (
+        <Paper mb={0}>
+          <List
+            items={[
+              <ListEntryGeneric onPress={confirmClearDataAction}>
+                <Typography variant="list" palette="danger">
+                  {t("screens.settings.options.resetPreferences.label")}
+                </Typography>
+              </ListEntryGeneric>,
+            ]}
+          />
+        </Paper>
+      )}
+
+      <Paper mt={8}>
         <List
           items={[
             <ListEntryText

@@ -29,6 +29,7 @@ type Context = {
   locale: Locale;
   locales: Locale[];
   setLocale: (_locale: Locale) => void;
+  resetLocale: () => void;
   i18n: I18n;
 };
 
@@ -66,6 +67,10 @@ export function I18nProvider({
           _setLocale(loc);
           onLocaleChange?.(loc);
         },
+        resetLocale: () => {
+          _setLocale(defaultLocale);
+          onLocaleChange?.(defaultLocale);
+        },
         i18n,
       }}
     >
@@ -91,6 +96,11 @@ export function useLocales() {
 export function useSetLocale() {
   const { setLocale } = useI18n();
   return setLocale;
+}
+
+export function useResetLocale() {
+  const { resetLocale } = useI18n();
+  return resetLocale;
 }
 
 // i18n binding

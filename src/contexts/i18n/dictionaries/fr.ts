@@ -51,12 +51,17 @@ export const dictionary: Dictionary = {
           label: "Thème",
           values: themeValues,
         },
-        about: {
-          label: "À propos",
+        about: { label: "À propos" },
+        resetPreferences: {
+          label: "Réinitialiser vos préférences",
+          confirm: {
+            title: "Réinitialisation",
+            message: "Êtes-vous sur de vouloire réinitialiser toutes vos préférences?",
+            confirmLabel: "Oui",
+            cancelLabel: "Non",
+          },
         },
-        debug: {
-          label: "Debug",
-        },
+        debug: { label: "Debug" },
       },
       acknoledgement:
         "Vos préférences seront sauvegardées uniquement sur cet appareil. Si vous réinstallez l'application, vos préférences seront réinitialisées.",

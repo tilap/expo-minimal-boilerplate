@@ -17,6 +17,7 @@ const config = {
   },
   featureFlags: {
     debugScreen: process.env.NODE_ENV === "development",
+    resetPreferences: true,
   },
   ui: {
     lockScreenOrientation: OrientationLock.PORTRAIT_UP, // Changing it requires to update the `app.config.ts` > `orientation`
