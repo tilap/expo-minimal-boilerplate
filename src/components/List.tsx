@@ -14,7 +14,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-type ListProps = PaperProps & {
+export type ListProps = PaperProps & {
   items: React.ReactNode[];
   itemBoxProps?: BoxProps;
 };

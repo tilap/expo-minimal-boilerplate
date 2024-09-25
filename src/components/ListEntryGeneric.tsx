@@ -26,7 +26,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-interface ListEntryMenuProps {
+export type ListEntryMenuProps = {
   label: string;
   value?: string;
   onPress?: () => void;
@@ -36,7 +36,7 @@ interface ListEntryMenuProps {
     style?: ViewStyle | TextStyle;
   }>;
   highlightIcon?: boolean;
-}
+};
 
 export const ListEntryGeneric: React.FC<ListEntryMenuProps> = ({
   highlightIcon,

@@ -4,13 +4,13 @@ import { Platform, Pressable, PressableProps, ViewStyle } from "react-native";
 type ViewStylePossible = ViewStyle | false | null | undefined;
 type ViewStylePossibleWithArr = ViewStylePossible | ViewStylePossible[];
 
-interface ExtendedPressableProps extends PressableProps {
+export type ExtendedPressableProps = PressableProps & {
   children: React.ReactNode | ((_props: { pressed: boolean }) => React.ReactNode);
   style?: ViewStylePossibleWithArr | ((_state: { pressed: boolean }) => ViewStylePossibleWithArr);
   pressedOpacity?: number;
   rippleColor?: string;
   pressRetentionOffset?: { top: number; left: number; bottom: number; right: number };
-}
+};
 
 export const ExtendedPressable: React.FC<ExtendedPressableProps> = ({
   children,

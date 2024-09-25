@@ -1,6 +1,6 @@
 import React from "react";
 
-type ErrorBoundaryProps = React.PropsWithChildren<{
+export type ErrorBoundaryProps = React.PropsWithChildren<{
   handleError?: (_error: Error, _errorInfo: unknown) => void;
   ErrorScreen?: React.ComponentType<{ error: Error }>;
 }>;
