@@ -5,15 +5,14 @@ import { DarkmodeContext, DarkmodeProvider } from "@contexts/darkmode";
 import { type Locale, locales } from "@contexts/i18n";
 import { I18nProvider } from "@contexts/i18n";
 import { ThemeProvider } from "@contexts/theme";
-import { usePreferencesStore } from "@utils/stores/preferences";
+import { useCorePreferences } from "@utils/stores/preferences";
 import * as Localization from "expo-localization";
 import React from "react";
 
 const deviceLanguage = Localization.getLocales()?.[0]?.languageCode as unknown as Locale;
 
 export function AppProviders({ children }: React.PropsWithChildren) {
-  const preferences = usePreferencesStore();
-
+  const preferences = useCorePreferences();
   return (
     <ConfigProvider config={config}>
       <AppLoaderProvider forceLoadingState={!preferences.initialized}>

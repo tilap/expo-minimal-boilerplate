@@ -7,10 +7,11 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type PreferencesState = {
-  initialized: boolean;
   darkMode: DarkMode | null;
   locale: Locale | null;
   themeVariant: ThemeVariant | null;
+
+  initialized: boolean;
 };
 
 type PreferencesActions = {
@@ -23,15 +24,13 @@ type PreferencesActions = {
 
 const storage = createAsyncPersistStorage<PreferencesState>();
 
-export const usePreferencesStore = create<PreferencesState & PreferencesActions>()(
+const usePreferencesStore = create<PreferencesState & PreferencesActions>()(
   persist(
     (set) => ({
       initialized: false,
       darkMode: null,
       locale: null,
       themeVariant: null,
-      uiExpandStats: true,
-      setUiExpandStats: (expand: boolean) => set({ uiExpandStats: expand }),
       setDarkMode: (darkMode: DarkMode) => set({ darkMode }),
       setLocale: (locale: Locale) => set({ locale }),
       setThemeVariant: (v: ThemeVariant | null) => set({ themeVariant: v }),
@@ -52,13 +51,18 @@ export const usePreferencesStore = create<PreferencesState & PreferencesActions>
   ),
 );
 
-export const usePreferences = (): Pick<
+export const useCorePreferences = (): Pick<
   PreferencesState,
-  "darkMode" | "locale" | "themeVariant"
-> => {
+  "darkMode" | "locale" | "themeVariant" | "initialized"
+> &
+  Pick<PreferencesActions, "setDarkMode" | "setLocale" | "setThemeVariant"> => {
   return usePreferencesStore((store) => ({
     darkMode: store.darkMode,
+    initialized: store.initialized,
     locale: store.locale,
     themeVariant: store.themeVariant,
+    setDarkMode: store.setDarkMode,
+    setLocale: store.setLocale,
+    setThemeVariant: store.setThemeVariant,
   }));
 };
