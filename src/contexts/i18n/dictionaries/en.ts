@@ -1,4 +1,4 @@
-import { localeValues, themeValues } from "./shared";
+import { localeValues, localeValuesWithFlags, themeValues } from "./shared";
 
 const darkmodeValues = {
   dark: "Enabled",
@@ -38,7 +38,7 @@ export const dictionary = {
     },
     settings: {
       navigationTitle: "Preferences",
-      options: {
+      entries: {
         darkmode: {
           label: "Dark mode",
           values: darkmodeValues,
@@ -73,7 +73,7 @@ export const dictionary = {
     },
     settingsLocale: {
       navigationTitle: "Language",
-      options: localeValues,
+      options: localeValuesWithFlags,
     },
     settingsThemeVariant: {
       navigationTitle: "Theme",
