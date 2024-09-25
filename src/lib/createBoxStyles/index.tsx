@@ -21,10 +21,10 @@ type MarginPaddingProps = {
 // Define the sx prop type, which can be either an object or a function returning an object
 // Now using a generic type T for theme
 type SxProps<T> =
-  | (ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] }) // Include fullWidth and display in sx
+  | (ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] })
   | ((
       _theme: T,
-    ) => ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] }); // Include fullWidth and display in sx function
+    ) => ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] });
 
 // Define props for flexbox properties
 type FlexboxProps = {
@@ -39,6 +39,7 @@ type FlexboxProps = {
     | "space-around"
     | "space-evenly";
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+  gap?: DimensionValue;
 };
 
 // Combine all props for the Box component, now using a generic type T for theme
@@ -92,6 +93,7 @@ export function createStyles<Theme = object>(
     flexWrap,
     justifyContent,
     alignItems,
+    gap, // Destructure gap
     sx,
     fullWidth,
     display,
@@ -106,8 +108,9 @@ export function createStyles<Theme = object>(
     ...(flexWrap && { flexWrap }),
     ...(justifyContent && { justifyContent }),
     ...(alignItems && { alignItems }),
-    ...(fullWidth && { width: "100%" }), // Set width to 100% if fullWidth is true
-    ...(display && { display }), // Set display property if provided
+    ...(fullWidth && { width: "100%" }),
+    ...(display && { display }),
+    ...(gap !== undefined && { gap: Number(applyMultiplier(multiplier, gap) || 0) }),
   };
 
   // Apply margin and padding to base styles
