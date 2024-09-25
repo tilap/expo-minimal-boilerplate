@@ -17,6 +17,7 @@ export const dictionary = {
         version: { label: "Version" },
         privacy: { label: "Privacy policy" },
         terms: { label: "Terms and conditions" },
+        debug: { label: "Debug" },
       },
     },
     debug: {
@@ -60,7 +61,6 @@ export const dictionary = {
             cancelLabel: "Cancel",
           },
         },
-        debug: { label: "Debug" },
       },
       acknoledgement:
         "Your preferences will be saved on this device only, but will be reset if you reinstall the app.",
@@ -68,12 +68,12 @@ export const dictionary = {
     settingsDarkmode: {
       navigationTitle: "Dark mode",
       options: darkmodeValues,
+      acknowledgement:
+        "If you choose automatic, the mode will adjust based on your device settings.",
     },
     settingsLocale: {
       navigationTitle: "Language",
       options: localeValues,
-      acknoledgement:
-        "If you choose automatic, the theme will adjust based on your device settings.",
     },
     settingsThemeVariant: {
       navigationTitle: "Theme",

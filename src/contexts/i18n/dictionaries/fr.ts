@@ -1,5 +1,5 @@
 import { type Dictionary } from "./en";
-import { localeValues, themeValues } from "./shared";
+import { localeValues, localeValuesWithFlags, themeValues } from "./shared";
 
 const darkmodeValues = {
   dark: "Activé",
@@ -18,6 +18,7 @@ export const dictionary: Dictionary = {
         version: { label: "Version" },
         privacy: { label: "Politique de confidentialité" },
         terms: { label: "Conditions d'utilisations" },
+        debug: { label: "Debug" },
       },
     },
     debug: {
@@ -38,7 +39,7 @@ export const dictionary: Dictionary = {
     },
     settings: {
       navigationTitle: "Préférences",
-      options: {
+      entries: {
         darkmode: {
           label: "Mode sombre",
           values: darkmodeValues,
@@ -61,7 +62,6 @@ export const dictionary: Dictionary = {
             cancelLabel: "Non",
           },
         },
-        debug: { label: "Debug" },
       },
       acknoledgement:
         "Vos préférences seront sauvegardées uniquement sur cet appareil. Si vous réinstallez l'application, vos préférences seront réinitialisées.",
@@ -69,12 +69,12 @@ export const dictionary: Dictionary = {
     settingsDarkmode: {
       navigationTitle: "Mode sombre",
       options: darkmodeValues,
+      acknowledgement:
+        "Si vous choisissez automatique, le mode s'ajustera en fonction de la configuration de votre appareil.",
     },
     settingsLocale: {
       navigationTitle: "Langue",
-      options: localeValues,
-      acknoledgement:
-        "Si vous choisissez automatique, le thème s'ajustera en fonction de la configuration de votre appareil.",
+      options: localeValuesWithFlags,
     },
     settingsThemeVariant: {
       navigationTitle: "Theme",

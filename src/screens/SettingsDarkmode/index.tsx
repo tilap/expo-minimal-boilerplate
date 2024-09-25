@@ -46,7 +46,7 @@ export function SettingsDarkmode() {
       </Paper>
       <Box my={4} px={3}>
         <Typography variant="annotation" palette="subtle" mx={3}>
-          {t("screens.settingsLocale.acknoledgement")}
+          {t("screens.settingsDarkmode.acknowledgement")}
         </Typography>
       </Box>
     </ScreenContainer>

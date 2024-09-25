@@ -1,7 +1,6 @@
 import { Box } from "@components/Box";
 import { StartToEndIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
 import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
@@ -12,14 +11,17 @@ import { useLocale, useT } from "@contexts/i18n/index";
 import { useThemeVariant } from "@contexts/theme";
 import {
   useGoToAbout,
-  useGoToDebug,
   useGoToSettingsDarkmode,
   useGoToSettingsLocale,
   useGoToSettingsThemeVariant,
 } from "@navigation/helpers";
-import { useResetPreferences } from "@utils/useResetPreferences";
-import React from "react";
-import { Alert } from "react-native";
+import React, { lazy } from "react";
+
+const ListEntryResetPreferences = lazy(() =>
+  import("./ListEntryResetPreferences").then((module) => ({
+    default: module.ListEntryResetPreferences,
+  })),
+);
 
 export function Settings() {
   const locale = useLocale();
@@ -29,25 +31,10 @@ export function Settings() {
   const featureFlags = useFeatureFlags();
 
   const gotoAbout = useGoToAbout();
-  const gotoDebug = useGoToDebug();
+
   const goToSettingsDarkmode = useGoToSettingsDarkmode();
   const goToSettingsLocale = useGoToSettingsLocale();
   const gotoSettingsThemeVariant = useGoToSettingsThemeVariant();
-  const resetPreferences = useResetPreferences();
-
-  const confirmClearDataAction = () =>
-    Alert.alert(
-      t("screens.settings.options.resetPreferences.confirm.title"),
-      t("screens.settings.options.resetPreferences.confirm.message"),
-      [
-        {
-          text: t("screens.settings.options.resetPreferences.confirm.cancelLabel"),
-          // onPress: () => clearAppData(),
-          style: "cancel",
-        },
-        { text: "OK", onPress: () => resetPreferences() },
-      ],
-    );
 
   return (
     <ScreenContainer preset="page" withScrollView>
@@ -55,20 +42,20 @@ export function Settings() {
         <List
           items={[
             <ListEntryText
-              label={t("screens.settings.options.darkmode.label")}
-              value={t(`screens.settings.options.darkmode.values.${darkMode}`)}
+              label={t("screens.settings.entries.darkmode.label")}
+              value={t(`screens.settings.entries.darkmode.values.${darkMode}`)}
               onPress={goToSettingsDarkmode}
               Icon={StartToEndIcon}
             />,
             <ListEntryText
-              label={t("screens.settings.options.themeVariant.label")}
-              value={t(`screens.settings.options.themeVariant.values.${themeVariant}`)}
+              label={t("screens.settings.entries.themeVariant.label")}
+              value={t(`screens.settings.entries.themeVariant.values.${themeVariant}`)}
               onPress={gotoSettingsThemeVariant}
               Icon={StartToEndIcon}
             />,
             <ListEntryText
-              label={t("screens.settings.options.locale.label")}
-              value={t(`screens.settings.options.locale.values.${locale as "fr" | "en"}`)}
+              label={t("screens.settings.entries.locale.label")}
+              value={t(`screens.settings.entries.locale.values.${locale as "fr" | "en"}`)}
               onPress={goToSettingsLocale}
               Icon={StartToEndIcon}
             />,
@@ -83,44 +70,22 @@ export function Settings() {
       </Box>
 
       {featureFlags.resetPreferences && (
-        <Paper mb={0}>
-          <List
-            items={[
-              <ListEntryGeneric onPress={confirmClearDataAction}>
-                <Typography variant="list" palette="danger">
-                  {t("screens.settings.options.resetPreferences.label")}
-                </Typography>
-              </ListEntryGeneric>,
-            ]}
-          />
+        <Paper mb={8}>
+          <List items={[<ListEntryResetPreferences />]} />
         </Paper>
       )}
 
-      <Paper mt={8}>
+      <Paper>
         <List
           items={[
             <ListEntryText
-              label={t("screens.settings.options.about.label")}
+              label={t("screens.settings.entries.about.label")}
               onPress={gotoAbout}
               Icon={StartToEndIcon}
             />,
           ]}
         />
       </Paper>
-
-      {featureFlags.debugScreen && (
-        <Paper mt={8}>
-          <List
-            items={[
-              <ListEntryText
-                label={t("screens.settings.options.debug.label")}
-                onPress={gotoDebug}
-                Icon={StartToEndIcon}
-              />,
-            ]}
-          />
-        </Paper>
-      )}
     </ScreenContainer>
   );
 }
