@@ -2,7 +2,7 @@ import { useFeatureFlags } from "@contexts/config";
 import { useT } from "@contexts/i18n/index";
 import { useTheme } from "@contexts/theme";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
-import { Home } from "@screens/Home";
+import { HomeScreen } from "@screens/Home";
 import React, { lazy } from "react";
 import { Dimensions } from "react-native";
 import { enableScreens } from "react-native-screens";
@@ -10,38 +10,40 @@ import { AppStackParams, Routes } from "../routes";
 import { NavbarHeadLeft } from "./NavbarHeadLeft";
 import { NavbarHeadRightHome } from "./NavbarHeadRightHome";
 
-const Settings = lazy(() =>
-  import("@screens/Settings").then((module) => ({ default: module.Settings })),
+const SettingsScreen = lazy(() =>
+  import("@screens/Settings").then((module) => ({ default: module.SettingsScreen })),
 );
-const SettingsDarkmode = lazy(() =>
-  import("@screens/SettingsDarkmode").then((module) => ({ default: module.SettingsDarkmode })),
+const SettingsDarkmodeScreen = lazy(() =>
+  import("@screens/SettingsDarkmode").then((module) => ({
+    default: module.SettingsDarkmodeScreen,
+  })),
 );
-const SettingsLocale = lazy(() =>
-  import("@screens/SettingsLocale").then((module) => ({ default: module.SettingsLocale })),
+const SettingsLocaleScreen = lazy(() =>
+  import("@screens/SettingsLocale").then((module) => ({ default: module.SettingsLocaleScreen })),
 );
-const SettingsThemeVariant = lazy(() =>
+const SettingsThemeVariantScreen = lazy(() =>
   import("@screens/SettingsThemeVariant").then((module) => ({
-    default: module.SettingsThemeVariant,
+    default: module.SettingsThemeVariantScreen,
   })),
 );
-const PermissionRequired = lazy(() =>
+const PermissionRequiredScreen = lazy(() =>
   import("@screens/PermissionRequired").then((module) => ({
-    default: module.PermissionRequired,
+    default: module.PermissionRequiredScreen,
   })),
 );
-const LegalWebview = lazy(() =>
+const LegalWebviewScreen = lazy(() =>
   import("@screens/LegalWebview").then((module) => ({
-    default: module.LegalWebview,
+    default: module.LegalWebviewScreen,
   })),
 );
-const DebugConfig = lazy(() =>
+const DebugConfigScreen = lazy(() =>
   import("@screens/DebugConfig").then((module) => ({
-    default: module.DebugConfig,
+    default: module.DebugConfigScreen,
   })),
 );
-const About = lazy(() =>
+const AboutScreen = lazy(() =>
   import("@screens/About").then((module) => ({
-    default: module.About,
+    default: module.AboutScreen,
   })),
 );
 
@@ -68,7 +70,7 @@ function AppStack() {
     >
       <Stack.Screen
         name={Routes.Home}
-        component={Home}
+        component={HomeScreen}
         options={{
           headerTitle: t("screens.home.navigationTitle"),
           headerRight: NavbarHeadRightHome,
@@ -77,28 +79,28 @@ function AppStack() {
 
       <Stack.Screen
         name={Routes.Settings}
-        component={Settings}
+        component={SettingsScreen}
         options={{
           headerTitle: t("screens.settings.navigationTitle"),
         }}
       />
       <Stack.Screen
         name={Routes.SettingsDarkmode}
-        component={SettingsDarkmode}
+        component={SettingsDarkmodeScreen}
         options={{
           headerTitle: t("screens.settingsDarkmode.navigationTitle"),
         }}
       />
       <Stack.Screen
         name={Routes.SettingsThemeVariant}
-        component={SettingsThemeVariant}
+        component={SettingsThemeVariantScreen}
         options={{
           headerTitle: t("screens.settingsThemeVariant.navigationTitle"),
         }}
       />
       <Stack.Screen
         name={Routes.SettingsLocale}
-        component={SettingsLocale}
+        component={SettingsLocaleScreen}
         options={{
           headerTitle: t("screens.settingsLocale.navigationTitle"),
         }}
@@ -106,7 +108,7 @@ function AppStack() {
       {featureFlags.debugScreen && (
         <Stack.Screen
           name={Routes.DebugConfig}
-          component={DebugConfig}
+          component={DebugConfigScreen}
           options={{
             headerTitle: t("screens.debugConfig.navigationTitle"),
           }}
@@ -115,7 +117,7 @@ function AppStack() {
       {featureFlags.debugScreen && (
         <Stack.Screen
           name={Routes.PermissionRequired}
-          component={PermissionRequired}
+          component={PermissionRequiredScreen}
           options={{
             headerTitle: t("screens.permissionRequired.navigationTitle"),
           }}
@@ -123,12 +125,12 @@ function AppStack() {
       )}
       <Stack.Screen
         name={Routes.About}
-        component={About}
+        component={AboutScreen}
         options={{
           headerTitle: t("screens.about.navigationTitle"),
         }}
       />
-      <Stack.Screen name={Routes.LegalWebview} component={LegalWebview} />
+      <Stack.Screen name={Routes.LegalWebview} component={LegalWebviewScreen} />
     </Stack.Navigator>
   );
 }

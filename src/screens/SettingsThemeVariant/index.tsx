@@ -7,7 +7,7 @@ import { useT } from "@contexts/i18n/index";
 import { themeVariants, useSetThemeVariant, useThemeVariant } from "@contexts/theme";
 import React from "react";
 
-export function SettingsThemeVariant() {
+export function SettingsThemeVariantScreen() {
   const themeVariant = useThemeVariant();
   const setThemeVariant = useSetThemeVariant();
   const t = useT();

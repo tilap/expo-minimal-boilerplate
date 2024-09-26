@@ -5,7 +5,7 @@ import { enableScreens } from "react-native-screens";
 import { ErrorBoundary } from "./src/components/ErrorBoundary";
 import config from "./src/config/index";
 import { RootNavigation } from "./src/navigation/routers/RootNavigation";
-import { AppErrorScreen } from "./src/screens/AppErrorScreen";
+import { AppErrorScreen } from "./src/screens/AppError";
 import { AppProviders } from "./src/utils/appProviders";
 import { root as logger } from "./src/utils/loggers";
 

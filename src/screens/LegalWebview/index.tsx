@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function LegalWebview() {
+export function LegalWebviewScreen() {
   const t = useT();
   const navigation = useNavigation();
   const route = useRoute<RouteProp<AppStackParams, Routes.LegalWebview>>();

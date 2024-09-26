@@ -6,7 +6,7 @@ import { useConfig } from "@contexts/config";
 import { useCorePreferences } from "@utils/stores/preferences";
 import React from "react";
 
-export function DebugConfig() {
+export function DebugConfigScreen() {
   const config = useConfig();
   const preferences = useCorePreferences();
 

@@ -23,7 +23,7 @@ const ListEntryResetPreferences = lazy(() =>
   })),
 );
 
-export function Settings() {
+export function SettingsScreen() {
   const locale = useLocale();
   const darkMode = useDarkmode();
   const themeVariant = useThemeVariant();

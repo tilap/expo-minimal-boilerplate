@@ -59,11 +59,11 @@ export type PermissionType =
   | "health"
   | "faceId";
 
-export type PermissionRequiredProps = {
+export type PermissionRequiredScreenProps = {
   type: PermissionType;
 };
 
-export function PermissionRequired({ type = "mediaLibrary" }: PermissionRequiredProps) {
+export function PermissionRequiredScreen({ type = "mediaLibrary" }: PermissionRequiredScreenProps) {
   const t = useT();
   const openDeviceSettings = useOpenDeviceSettings();
   const device = useShortDeviceName();

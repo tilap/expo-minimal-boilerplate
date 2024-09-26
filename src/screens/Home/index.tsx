@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function Home() {
+export function HomeScreen() {
   return (
     <ScreenContainer preset="full" style={styles.container}>
       <Box mb={8}>

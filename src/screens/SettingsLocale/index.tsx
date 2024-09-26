@@ -7,7 +7,7 @@ import { useLocale, useLocales, useSetLocale, useT } from "@contexts/i18n/index"
 
 import React from "react";
 
-export function SettingsLocale() {
+export function SettingsLocaleScreen() {
   const locale = useLocale();
   const locales = useLocales();
   const setLocale = useSetLocale();

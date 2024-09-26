@@ -14,7 +14,7 @@ import {
 import { getAppVersion } from "@utils/appVersion";
 import React from "react";
 
-export function About() {
+export function AboutScreen() {
   const t = useT();
   const featureFlags = useFeatureFlags();
   const gotoLegal = useGoToLegalWebview();

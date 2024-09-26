@@ -23,7 +23,7 @@ const iconMap: Record<
   system: DarkmmodeAutomaticIcon,
 };
 
-export function SettingsDarkmode() {
+export function SettingsDarkmodeScreen() {
   const darkMode = useDarkmode();
   const setDarkMode = useSetDarkmode();
   const t = useT();
