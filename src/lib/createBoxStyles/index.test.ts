@@ -1,10 +1,10 @@
 import { ViewStyle } from "react-native";
-import { createStyles } from ".";
+import { BaseTheme, createStyles } from ".";
 
-type Theme = { prop: string };
+type ThemeTest = { prop: string } & BaseTheme;
 
 describe("createStyles", () => {
-  const theme: Theme = { prop: "value" };
+  const theme: ThemeTest = { prop: "value" };
 
   test("should handle fullWidth and display together", () => {
     const props = {
@@ -226,6 +226,46 @@ describe("createStyles", () => {
     expect(styles.paddingLeft).toBe(120 * 4); // pl
     expect(styles.paddingHorizontal).toBe(130 * 4); // px
     expect(styles.paddingVertical).toBe(140 * 4); // py
+  });
+
+  test("should apply margin and padding styles from sx when theme has a custom multiplier", () => {
+    const props = {
+      sx: {
+        m: 10,
+        mt: 20,
+        mr: 30,
+        mb: 40,
+        ml: 50,
+        mx: 60,
+        my: 70,
+        p: 80,
+        pt: 90,
+        pr: 100,
+        pb: 110,
+        pl: 120,
+        px: 130,
+        py: 140,
+      },
+    };
+
+    const boxMultiplier = 2;
+    const customTheme: ThemeTest = { prop: "value", boxMultiplier };
+
+    const styles = createStyles(props, customTheme);
+    expect(styles.margin).toBe(10 * boxMultiplier); // m
+    expect(styles.marginTop).toBe(20 * boxMultiplier); // mt
+    expect(styles.marginRight).toBe(30 * boxMultiplier); // mr
+    expect(styles.marginBottom).toBe(40 * boxMultiplier); // mb
+    expect(styles.marginLeft).toBe(50 * boxMultiplier); // ml
+    expect(styles.marginHorizontal).toBe(60 * boxMultiplier); // mx
+    expect(styles.marginVertical).toBe(70 * boxMultiplier); // my
+    expect(styles.padding).toBe(80 * boxMultiplier); // p
+    expect(styles.paddingTop).toBe(90 * boxMultiplier); // pt
+    expect(styles.paddingRight).toBe(100 * boxMultiplier); // pr
+    expect(styles.paddingBottom).toBe(110 * boxMultiplier); // pb
+    expect(styles.paddingLeft).toBe(120 * boxMultiplier); // pl
+    expect(styles.paddingHorizontal).toBe(130 * boxMultiplier); // px
+    expect(styles.paddingVertical).toBe(140 * boxMultiplier); // py
   });
 
   test("should apply fullWidth from sx styles", () => {

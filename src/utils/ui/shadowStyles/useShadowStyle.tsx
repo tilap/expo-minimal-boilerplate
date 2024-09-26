@@ -1,10 +1,11 @@
 import { useTheme } from "@contexts/theme";
+import { ViewStyle } from "react-native";
 
 type Shadow = "low" | "base" | "high";
 
 export type ShadowStyleProps = {
-  shadow: Shadow;
-};
+  shadow?: Shadow;
+} & { style?: ViewStyle };
 
 export function useShadowStyle(props: ShadowStyleProps) {
   const theme = useTheme();

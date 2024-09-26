@@ -3,7 +3,7 @@ import { withBoxStyle } from "@utils/ui/boxStyles/hoc";
 import { withShadowStyle } from "@utils/ui/shadowStyles/hoc";
 import React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import { Box, BoxProps } from "./Box";
+import { Box } from "./Box";
 
 const styles = (theme: Theme) =>
   StyleSheet.create({
@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type PaperProps = BoxProps & {
+export type PaperProps = {
   noBackground?: boolean;
   style?: ViewStyle;
 };

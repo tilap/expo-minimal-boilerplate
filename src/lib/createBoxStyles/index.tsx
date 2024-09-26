@@ -80,7 +80,7 @@ const applyMarginPadding = (
   };
 };
 
-type BaseTheme = {
+export type BaseTheme = {
   boxMultiplier?: number;
 };
 
