@@ -1,5 +1,5 @@
 import { type Theme, useThemedStyles } from "@contexts/theme";
-import { type BoxStyleProps, withBoxStyle } from "@utils/boxStyles/hoc";
+import { type BoxStyleProps, withBoxStyle } from "@utils/ui/boxStyles/hoc";
 import React, { useRef } from "react";
 import { Animated, StyleSheet, View, ViewStyle } from "react-native";
 import { ExtendedPressable, type ExtendedPressableProps } from "./ExtendedPressable";
@@ -99,6 +99,7 @@ export const Demo = () => (
   <View style={{ gap: 16 }}>
     <Button text="Default" />
     <Button text="Schema Primary" scheme="primary" />
+    <Button text="Schema Default" scheme="default" />
     <Button text="Schema Default" scheme="default" />
     <Button text="Disabled" disabled />
   </View>

@@ -1,8 +1,8 @@
 import fonts from "@assets/font";
-import { Theme, useThemedStyles } from "@contexts/theme";
-import { BoxStyleProps, withBoxStyle } from "@utils/boxStyles/hoc";
+import { type Theme, useThemedStyles } from "@contexts/theme";
+import { type BoxStyleProps, withBoxStyle } from "@utils/ui/boxStyles/hoc";
 import React from "react";
-import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
+import { type StyleProp, StyleSheet, Text, type TextStyle, View } from "react-native";
 
 export type FontFamily = keyof typeof fonts;
 export type Palette = "text" | "primary" | "subtle" | "danger" | "navigation";

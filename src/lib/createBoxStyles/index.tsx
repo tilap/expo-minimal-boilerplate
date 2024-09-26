@@ -45,8 +45,8 @@ type FlexboxProps = {
 // Combine all props for the Box component, now using a generic type T for theme
 export interface BoxProps<T> extends ViewProps, MarginPaddingProps, FlexboxProps {
   sx?: SxProps<T>;
-  fullWidth?: boolean; // Add fullWidth property
-  display?: ViewStyle["display"]; // Add display property
+  fullWidth?: boolean;
+  display?: ViewStyle["display"];
 }
 
 // Apply margin and padding styles to a ViewStyle object
@@ -80,12 +80,15 @@ const applyMarginPadding = (
   };
 };
 
+type BaseTheme = {
+  boxMultiplier?: number;
+};
+
 // Create styles based on props and theme
 // Now using a generic type Theme with a default of object
-export function createStyles<Theme = object>(
+export function createStyles<Theme extends BaseTheme = object>(
   props: BoxProps<Theme>,
   theme: Theme,
-  multiplier = 4,
 ): ViewStyle {
   const {
     flex,
@@ -99,6 +102,8 @@ export function createStyles<Theme = object>(
     display,
     ...marginPaddingProps
   } = props;
+
+  const multiplier = theme?.boxMultiplier || 4;
 
   // Create base styles from flexbox props
   const baseStyles: ViewStyle = {

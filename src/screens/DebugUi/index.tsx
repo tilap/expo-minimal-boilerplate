@@ -1,6 +1,7 @@
 import { Box } from "@components/Box";
 import { Button, Demo as ButtonDemo } from "@components/Button";
 import { Demo as IconDemo } from "@components/Icon";
+import { Demo as PaperDemo } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Demo as TypographyDemo } from "@components/Typography";
 import { useGoToDebugUi } from "@navigation/helpers";
@@ -42,4 +43,5 @@ const items = {
   Typography: () => <TypographyDemo />,
   Button: () => <ButtonDemo />,
   Icon: () => <IconDemo />,
+  Paper: () => <PaperDemo />,
 };

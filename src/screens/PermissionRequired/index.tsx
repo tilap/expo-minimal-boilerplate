@@ -4,24 +4,19 @@ import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
 import { useT } from "@contexts/i18n";
+import { type Theme, useThemedStyles } from "@contexts/theme";
 import { useOpenDeviceSettings } from "@utils/useOpenDeviceSettings";
 import { useShortDeviceName } from "@utils/useShortDeviceName";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-const style = StyleSheet.create({
-  paper: {
-    maxWidth: 400,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
+const styles = (theme: Theme) =>
+  StyleSheet.create({
+    paper: {
+      maxWidth: 400,
+      ...theme.shadows.base,
     },
-    shadowOpacity: 0.6,
-    shadowRadius: 3.05,
-    elevation: 4,
-  },
-});
+  });
 
 /**
  * Screen that is displayed when the user has not granted the necessary permissions.
@@ -66,11 +61,12 @@ export type PermissionRequiredScreenProps = {
 export function PermissionRequiredScreen({ type = "mediaLibrary" }: PermissionRequiredScreenProps) {
   const t = useT();
   const openDeviceSettings = useOpenDeviceSettings();
+  const themedStyles = useThemedStyles<typeof styles>(styles);
   const device = useShortDeviceName();
   return (
     <ScreenContainer preset="fullWithPadding">
       <Box flex={1} justifyContent="center" alignItems="center" fullWidth>
-        <Paper p={6} style={style.paper}>
+        <Paper p={6} style={themedStyles.paper}>
           <Typography variant="h2" mb={6}>
             {t(`screens.permissionRequired.${type}.title`)}
           </Typography>

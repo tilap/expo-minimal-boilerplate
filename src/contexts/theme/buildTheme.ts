@@ -1,6 +1,6 @@
 import { type Theme as NavigationTheme } from "@react-navigation/native";
 import { StackNavigationOptions } from "@react-navigation/stack";
-import { StatusBarProps } from "react-native";
+import { Platform, StatusBarProps } from "react-native";
 
 export type DarkMode = "dark" | "light";
 export const themeVariants = ["stitch", "flamingo", "grinch", "lorax"] as const;
@@ -93,6 +93,42 @@ const typographyVariants = {
   },
 };
 
+const shadows = {
+  low: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 1.2,
+      },
+      android: { elevation: 3 },
+    }),
+  },
+  base: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.23,
+        shadowRadius: 3.85,
+      },
+      android: { elevation: 6 },
+    }),
+  },
+  high: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.38,
+        shadowRadius: 6.37,
+      },
+      android: { elevation: 10 },
+    }),
+  },
+};
+
 export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
   const palette = {
     ...variants[variant],
@@ -135,12 +171,15 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
   return {
     darkMode: darkMode === "dark",
 
+    boxMultiplier: 4,
+
     navigation,
     screenOptions,
     StatusBar,
 
     palette,
     rounded,
+    shadows,
 
     components: {
       Button: {

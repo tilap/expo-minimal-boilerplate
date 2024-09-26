@@ -1,5 +1,5 @@
-import { withBoxStyle } from "@utils/boxStyles/hoc";
-import { type BoxStyleProps } from "@utils/boxStyles/useBoxStyle";
+import { withBoxStyle } from "@utils/ui/boxStyles/hoc";
+import { type BoxStyleProps } from "@utils/ui/boxStyles/useBoxStyle";
 import React from "react";
 import { View } from "react-native";
 
