@@ -3,9 +3,10 @@ import { useT } from "@contexts/i18n/index";
 import { useTheme } from "@contexts/theme";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import { About } from "@screens/About";
-import { Debug } from "@screens/Debug";
+import { DebugConfig } from "@screens/DebugConfig";
 import { Home } from "@screens/Home";
 import { LegalWebview } from "@screens/LegalWebview";
+import { PermissionRequired } from "@screens/PermissionRequired";
 import { Settings } from "@screens/Settings";
 import { SettingsDarkmode } from "@screens/SettingsDarkmode";
 import { SettingsLocale } from "@screens/SettingsLocale";
@@ -77,13 +78,24 @@ function AppStack() {
       />
       {featureFlags.debugScreen && (
         <Stack.Screen
-          name={Routes.Debug}
-          component={Debug}
+          name={Routes.DebugConfig}
+          component={DebugConfig}
           options={{
-            headerTitle: t("screens.debug.navigationTitle"),
+            headerTitle: t("screens.debugConfig.navigationTitle"),
           }}
         />
       )}
+
+      {featureFlags.debugScreen && (
+        <Stack.Screen
+          name={Routes.PermissionRequired}
+          component={PermissionRequired}
+          options={{
+            headerTitle: t("screens.permissionRequired.navigationTitle"),
+          }}
+        />
+      )}
+
       <Stack.Screen
         name={Routes.About}
         component={About}

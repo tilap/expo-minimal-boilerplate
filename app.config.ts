@@ -51,7 +51,15 @@ const makeConfig = ({ config }: ConfigContext): ExpoConfig => ({
       projectId: "xxxx-xxxx-xxxx-xxxx-xxxx",
     },
   },
-  plugins: [],
+  plugins: [
+    [
+      "expo-media-library",
+      {
+        photosPermission: "Allow $(PRODUCT_NAME) to access your photos.",
+        savePhotosPermission: "Allow $(PRODUCT_NAME) to save photos.",
+      },
+    ],
+  ],
 });
 
 export default makeConfig;

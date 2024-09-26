@@ -1,8 +1,9 @@
 import { type DarkMode } from "@contexts/darkmode";
 import { type Locale } from "@contexts/i18n";
 import { type ThemeVariant } from "@contexts/theme";
-
+import { DeviceType, deviceType } from "expo-device";
 import { OrientationLock } from "expo-screen-orientation";
+import { Platform } from "react-native";
 
 const defaultDarkMode: DarkMode = "system";
 const defaultLocale: Locale = "en";
@@ -18,6 +19,13 @@ const config = {
   featureFlags: {
     debugScreen: process.env.NODE_ENV === "development",
     resetPreferences: true,
+  },
+  Platform: {
+    OS: Platform.OS,
+  },
+  Device: {
+    deviceType,
+    DeviceType,
   },
   ui: {
     lockScreenOrientation: OrientationLock.PORTRAIT_UP, // Changing it requires to update the `app.config.ts` > `orientation`

@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { PermissionType } from "@screens/PermissionRequired";
 import { useCallback } from "react";
 import { AppStackParams, Routes } from "./routes";
 
@@ -36,7 +37,15 @@ export function useGoToSettingsThemeVariant() {
   return useCallback(() => navigation.navigate(Routes.SettingsThemeVariant), [navigation]);
 }
 
-export function useGoToDebug() {
+export function useGoToDebugConfig() {
   const navigation = useNavigation<StackNavigationProp<AppStackParams>>();
-  return useCallback(() => navigation.navigate(Routes.Debug), [navigation]);
+  return useCallback(() => navigation.navigate(Routes.DebugConfig), [navigation]);
+}
+
+export function useGoToPermissionRequired() {
+  const navigation = useNavigation<StackNavigationProp<AppStackParams>>();
+  return useCallback(
+    (type: PermissionType) => navigation.navigate(Routes.PermissionRequired, { type }),
+    [navigation],
+  );
 }

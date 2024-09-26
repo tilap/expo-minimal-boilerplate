@@ -17,11 +17,13 @@ export const dictionary = {
         version: { label: "Version" },
         privacy: { label: "Privacy policy" },
         terms: { label: "Terms and conditions" },
-        debug: { label: "Debug" },
+        debugConfig: { label: "Configuration" },
+        debugPermissionRequired: { label: "Permissions screen" },
       },
+      debug: { title: "Debug" },
     },
-    debug: {
-      navigationTitle: "Debug",
+    debugConfig: {
+      navigationTitle: "Configuration debug",
     },
     home: {
       navigationTitle: "Home",
@@ -35,6 +37,81 @@ export const dictionary = {
       },
       loading: "Loading...",
       error: "Unable to open the webpage",
+    },
+    permissionRequired: {
+      navigationTitle: "Permission screen",
+      camera: {
+        title: "Camera Permission Required",
+        message:
+          "This application needs access to the camera. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      location: {
+        title: "Location Permission Required",
+        message:
+          "This application needs access to your location. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      mediaLibrary: {
+        title: "Media Library Permission Required",
+        message:
+          "This application needs access to the photo library. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      contacts: {
+        title: "Contacts Permission Required",
+        message:
+          "This application needs access to your contacts. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      notifications: {
+        title: "Notifications Permission Required",
+        message:
+          "This application needs permission to send notifications. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      microphone: {
+        title: "Microphone Permission Required",
+        message:
+          "This application needs access to the microphone. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      calendar: {
+        title: "Calendar Permission Required",
+        message:
+          "This application needs access to your calendar. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      reminders: {
+        title: "Reminders Permission Required",
+        message:
+          "This application needs access to your reminders. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      motion: {
+        title: "Motion Permission Required",
+        message:
+          "This application needs access to motion data. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      bluetooth: {
+        title: "Bluetooth Permission Required",
+        message:
+          "This application needs access to Bluetooth. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      health: {
+        title: "Health Permission Required",
+        message:
+          "This application needs access to health data. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
+      faceId: {
+        title: "Face ID Permission Required",
+        message:
+          "This application needs access to Face ID. You can grant access in your %{device} settings.",
+        button: "Open device settings",
+      },
     },
     settings: {
       navigationTitle: "Preferences",

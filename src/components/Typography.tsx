@@ -1,78 +1,139 @@
+import fonts from "@assets/font";
 import { Theme, useThemedStyles } from "@contexts/theme";
 import { BoxStyleProps, withBoxStyle } from "@utils/boxStyles/hoc";
 import React from "react";
-import { StyleSheet, Text, TextStyle } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle } from "react-native";
 
-type TypographyVariant = "h1" | "h2" | "h3" | "text" | "list" | "annotation";
-type TypographyAlignment = "start" | "center" | "end";
-type Palette = "text" | "primary" | "subtle" | "danger" | "navigation";
+export type FontFamily = keyof typeof fonts;
+export type Palette = "text" | "primary" | "subtle" | "danger" | "navigation";
+export type Direction = "start" | "end";
 
-export enum FontFamily {
-  Light = "Light",
-  Regular = "Regular",
-  Bold = "Bold",
-  Black = "Black",
-}
+export type TypographyAlignment = Direction | TextStyle["textAlign"];
+
+export type TypographyVariant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "text"
+  | "list"
+  | "annotation"
+  | "button";
+
+export type TypographyVariantProps = Pick<
+  TextStyle,
+  "fontSize" | "fontStyle" | "letterSpacing" | "lineHeight" | "textTransform"
+> & {
+  fontFamily?: FontFamily;
+};
 
 const palettesStyles = (theme: Theme) =>
-  StyleSheet.create<Record<string, TextStyle>>({
-    primary: theme.components.Typography.primary,
-    text: theme.components.Typography.text,
-    subtle: theme.components.Typography.subtle,
-    danger: theme.components.Typography.danger,
-    navigation: theme.components.Typography.navigation,
+  StyleSheet.create<Record<Palette, TextStyle>>({
+    primary: theme.components.Typography.palette.primary,
+    text: theme.components.Typography.palette.text,
+    subtle: theme.components.Typography.palette.subtle,
+    danger: theme.components.Typography.palette.danger,
+    navigation: theme.components.Typography.palette.navigation,
   });
 
-const variantsStyles = StyleSheet.create<Record<string, TextStyle>>({
-  h1: {
-    fontFamily: FontFamily.Black,
-    fontSize: 24,
+function castFontFamily(fontFamily: string | undefined): FontFamily | undefined {
+  if (typeof fontFamily === "undefined") {
+    return undefined;
+  }
+  if (!(fontFamily in fonts)) {
+    throw new Error(`Font family ${fontFamily} not found`);
+  }
+  return fontFamily as FontFamily;
+}
+
+function castFontStyle(fontStyle: string | undefined): TextStyle["fontStyle"] | undefined {
+  if (typeof fontStyle === "undefined") {
+    return undefined;
+  }
+  if (!["normal", "italic"].includes(fontStyle)) {
+    throw new Error(`Invalid font style ${fontStyle}`);
+  }
+  return fontStyle as TextStyle["fontStyle"];
+}
+
+function castTextTransform(
+  textTransform: string | undefined,
+): TextStyle["textTransform"] | undefined {
+  if (typeof textTransform === "undefined") {
+    return undefined;
+  }
+  if (!["uppercase", "none", "capitalize", "lowercase"].includes(textTransform)) {
+    throw new Error(`Invalid text transform ${textTransform}`);
+  }
+  return textTransform as TextStyle["textTransform"];
+}
+
+/**
+ * Casts the theme typography props to the correct type to avoid bad configuration
+ * @param configStyle - The theme typography props
+ * @returns The typography props
+ */
+function castThemeTypographyProps(
+  configStyle: Omit<TypographyVariantProps, "fontFamily" | "fontStyle" | "textTransform"> & {
+    fontFamily?: string;
+    fontStyle?: string;
+    textTransform?: string;
   },
-  h2: {
-    fontFamily: FontFamily.Bold,
-    fontSize: 20,
-  },
-  h3: {
-    fontFamily: FontFamily.Bold,
-    fontSize: 18,
-  },
-  text: {
-    fontFamily: FontFamily.Regular,
-    fontSize: 16,
-  },
-  annotation: {
-    fontFamily: FontFamily.Light,
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  list: {
-    fontFamily: FontFamily.Regular,
-    fontSize: 16,
-  },
-  button: {
-    fontFamily: FontFamily.Bold,
-    fontSize: 16,
-  },
-});
+): TypographyVariantProps {
+  return {
+    ...configStyle,
+    fontFamily: castFontFamily(configStyle.fontFamily),
+    fontStyle: castFontStyle(configStyle.fontStyle),
+    textTransform: castTextTransform(configStyle.textTransform),
+  };
+}
+
+function convertTypographyAlignToTextAlign(
+  textAlign: TextStyle["textAlign"] | Direction | undefined,
+): TextStyle["textAlign"] | undefined {
+  if (typeof textAlign === "undefined") {
+    return undefined;
+  }
+  switch (textAlign) {
+    case "start":
+      return "left";
+    case "end":
+      return "right";
+    default:
+      return textAlign;
+  }
+}
+
+const variantsStyles = (theme: Theme) =>
+  StyleSheet.create<Record<TypographyVariant, TypographyVariantProps>>({
+    h1: castThemeTypographyProps(theme.components.Typography.variants.h1),
+    h2: castThemeTypographyProps(theme.components.Typography.variants.h2),
+    h3: castThemeTypographyProps(theme.components.Typography.variants.h3),
+    h4: castThemeTypographyProps(theme.components.Typography.variants.h4),
+    text: castThemeTypographyProps(theme.components.Typography.variants.text),
+    annotation: castThemeTypographyProps(theme.components.Typography.variants.annotation),
+    list: castThemeTypographyProps(theme.components.Typography.variants.list),
+    button: castThemeTypographyProps(theme.components.Typography.variants.button),
+  });
 
 export type TypographyProps = BoxStyleProps & {
   variant?: TypographyVariant;
   align?: TypographyAlignment;
-  style?: TextStyle | TextStyle[];
+  style?: StyleProp<TextStyle>;
   children: React.ReactNode;
   palette?: Palette;
 };
 
 export const Typography = withBoxStyle(
-  ({ variant = "text", align = "start", children, style, palette = "text" }: TypographyProps) => {
+  ({ align = "start", children, style, palette = "text", variant = "text" }: TypographyProps) => {
     const paletteStyle = useThemedStyles<typeof palettesStyles>(palettesStyles);
-    const variantStyle = variantsStyles[variant];
-    const alignmentStyle: TextStyle = {
-      textAlign: align === "start" ? "left" : align === "end" ? "right" : "center",
-    };
+    const variantStyles = useThemedStyles<typeof variantsStyles>(variantsStyles);
+    const textAlign = convertTypographyAlignToTextAlign(align);
 
     return (
-      <Text style={[paletteStyle[palette], variantStyle, alignmentStyle, style]}>{children}</Text>
+      <Text style={[paletteStyle[palette], variantStyles[variant], { textAlign }, style]}>
+        {children}
+      </Text>
     );
   },
 );

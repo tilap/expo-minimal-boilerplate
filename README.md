@@ -1,6 +1,6 @@
 # React native boilerplate with Expo
 
-A bare boilerplate for expo.
+A bare minimal boilerplate for expo app.
 
 - app initialization and assets loader
 - basic navigation and screens so user can set his preferences for localization, theme and dark mode
@@ -25,9 +25,9 @@ Comes with common dev tools:
 
 Keep it bare so:
 
-- No store (bring your own Redux, Zustand, ...)
-- No ui librariry (just a few bare component)
-- No account or any business stuff
+- No store (bring your own Redux, Zustand, ...). A Zustand one is used for Preferences and can easily be replaced or let working by its own.
+- No ui librariry, just a few bare component (Typography, Box, Button, ...).
+- No account nor business stuff
 
 ### Screenshots
 

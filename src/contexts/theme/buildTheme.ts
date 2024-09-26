@@ -56,6 +56,43 @@ const palettes: Record<DarkMode, Omit<Palette, ThemeVariantProps>> = {
   },
 };
 
+const typographyVariants = {
+  h1: {
+    fontFamily: "Black",
+    fontSize: 24,
+  },
+  h2: {
+    fontFamily: "Bold",
+    fontSize: 20,
+  },
+  h3: {
+    fontFamily: "Bold",
+    fontSize: 18,
+  },
+  h4: {
+    fontFamily: "Regular",
+    fontSize: 13,
+    textTransform: "uppercase",
+  },
+  text: {
+    fontFamily: "Regular",
+    fontSize: 16,
+  },
+  annotation: {
+    fontFamily: "Light",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  list: {
+    fontFamily: "Regular",
+    fontSize: 16,
+  },
+  button: {
+    fontFamily: "Bold",
+    fontSize: 18,
+  },
+};
+
 export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
   const palette = {
     ...variants[variant],
@@ -106,6 +143,18 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     rounded,
 
     components: {
+      Button: {
+        primary: {
+          backgroundColor: palette.primary,
+          borderColor: palette.primary,
+          color: "#fff",
+        },
+        default: {
+          backgroundColor: palette.surface,
+          borderColor: palette.border,
+          color: palette.text,
+        },
+      },
       List: {
         item: {
           borderBottomColor: palette.border,
@@ -140,11 +189,14 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
         backgroundColor: palette.surface,
       },
       Typography: {
-        text: { color: palette.text },
-        subtle: { color: palette.subtle },
-        primary: { color: palette.primary },
-        danger: { color: palette.danger },
-        navigation: { color: palette.navigation },
+        palette: {
+          text: { color: palette.text },
+          subtle: { color: palette.subtle },
+          primary: { color: palette.primary },
+          danger: { color: palette.danger },
+          navigation: { color: palette.navigation },
+        },
+        variants: typographyVariants,
       },
     },
   };

@@ -6,9 +6,10 @@ import { useConfig } from "@contexts/config";
 import { useCorePreferences } from "@utils/stores/preferences";
 import React from "react";
 
-export function Debug() {
+export function DebugConfig() {
   const config = useConfig();
   const preferences = useCorePreferences();
+
   return (
     <ScreenContainer preset="page" withScrollView>
       <Box p={2}>
