@@ -2,7 +2,7 @@ import fonts from "@assets/font";
 import { Theme, useThemedStyles } from "@contexts/theme";
 import { BoxStyleProps, withBoxStyle } from "@utils/boxStyles/hoc";
 import React from "react";
-import { StyleProp, StyleSheet, Text, TextStyle } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 
 export type FontFamily = keyof typeof fonts;
 export type Palette = "text" | "primary" | "subtle" | "danger" | "navigation";
@@ -136,4 +136,26 @@ export const Typography = withBoxStyle(
       </Text>
     );
   },
+);
+
+export const Demo = () => (
+  <View style={{ gap: 16 }}>
+    <Typography>Default text</Typography>
+    <Typography variant="h1">Variant h1</Typography>
+    <Typography variant="h2">Variant h2</Typography>
+    <Typography variant="h3">Variant h3</Typography>
+    <Typography variant="h4">Variant h4</Typography>
+    <Typography variant="text">Variant text</Typography>
+    <Typography variant="annotation">Variant annotation</Typography>
+    <Typography variant="list">Variant list</Typography>
+    <Typography variant="button">Variant button</Typography>
+    <Typography align="left">Align left</Typography>
+    <Typography align="center">Align center</Typography>
+    <Typography align="right">Align right</Typography>
+    <Typography palette="danger">Palette danger</Typography>
+    <Typography palette="primary">Palette primary</Typography>
+    <Typography palette="subtle">Palette subtle</Typography>
+    <Typography palette="text">Palette text</Typography>
+    <Typography palette="navigation">Palette navigation</Typography>
+  </View>
 );

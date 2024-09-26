@@ -1,5 +1,5 @@
 import { Box } from "@components/Box";
-import { DarkmmodeAutomaticIcon, DarkmodeDarkIcon, DarkmodeLightIcon } from "@components/Icon";
+import { DarkmodeAutomaticIcon, DarkmodeDarkIcon, DarkmodeLightIcon } from "@components/Icon";
 import { List } from "@components/List";
 import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
@@ -20,7 +20,7 @@ const iconMap: Record<
 > = {
   dark: DarkmodeDarkIcon,
   light: DarkmodeLightIcon,
-  system: DarkmmodeAutomaticIcon,
+  system: DarkmodeAutomaticIcon,
 };
 
 export function SettingsDarkmodeScreen() {

@@ -132,7 +132,7 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     base: 6,
   };
 
-  const theme = {
+  return {
     darkMode: darkMode === "dark",
 
     navigation,
@@ -153,6 +153,11 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
           backgroundColor: palette.surface,
           borderColor: palette.border,
           color: palette.text,
+        },
+        disabled: {
+          backgroundColor: palette.surface,
+          borderColor: palette.border,
+          color: palette.subtle,
         },
       },
       List: {
@@ -199,9 +204,7 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
         variants: typographyVariants,
       },
     },
-  };
-
-  return theme;
+  } as const;
 }
 
 export type Theme = ReturnType<typeof buildTheme>;

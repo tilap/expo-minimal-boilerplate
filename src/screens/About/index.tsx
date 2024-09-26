@@ -8,6 +8,7 @@ import { useFeatureFlags, useUrls } from "@contexts/config";
 import { useT } from "@contexts/i18n/index";
 import {
   useGoToDebugConfig,
+  useGoToDebugUi,
   useGoToLegalWebview,
   useGoToPermissionRequired,
 } from "@navigation/helpers";
@@ -20,6 +21,7 @@ export function AboutScreen() {
   const gotoLegal = useGoToLegalWebview();
   const gotoDebugConfig = useGoToDebugConfig();
   const gotoPermissionRequired = useGoToPermissionRequired();
+  const gotoDebugUi = useGoToDebugUi();
   const urls = useUrls();
   return (
     <ScreenContainer preset="page" withScrollView>
@@ -68,6 +70,11 @@ export function AboutScreen() {
                 <ListEntryText
                   label={`${t("screens.about.entries.debugPermissionRequired.label")} (location)`}
                   onPress={() => gotoPermissionRequired("location")}
+                  Icon={StartToEndIcon}
+                />,
+                <ListEntryText
+                  label={t("screens.about.entries.debugUi.label")}
+                  onPress={() => gotoDebugUi("")}
                   Icon={StartToEndIcon}
                 />,
               ]}

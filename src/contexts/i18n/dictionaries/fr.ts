@@ -20,6 +20,7 @@ export const dictionary: Dictionary = {
         terms: { label: "Conditions d'utilisations" },
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Écran de permissions" },
+        debugUi: { label: "Débogage de l'ui" },
       },
       debug: {
         title: "Débogage",
@@ -27,6 +28,9 @@ export const dictionary: Dictionary = {
     },
     debugConfig: {
       navigationTitle: "Debug config",
+    },
+    debugUi: {
+      navigationTitle: "Debug UI",
     },
     home: {
       navigationTitle: "Accueil",

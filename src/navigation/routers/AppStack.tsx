@@ -41,6 +41,11 @@ const DebugConfigScreen = lazy(() =>
     default: module.DebugConfigScreen,
   })),
 );
+const DebugUiScreen = lazy(() =>
+  import("@screens/DebugUi").then((module) => ({
+    default: module.DebugUiScreen,
+  })),
+);
 const AboutScreen = lazy(() =>
   import("@screens/About").then((module) => ({
     default: module.AboutScreen,
@@ -111,6 +116,15 @@ function AppStack() {
           component={DebugConfigScreen}
           options={{
             headerTitle: t("screens.debugConfig.navigationTitle"),
+          }}
+        />
+      )}
+      {featureFlags.debugScreen && (
+        <Stack.Screen
+          name={Routes.DebugUi}
+          component={DebugUiScreen}
+          options={{
+            headerTitle: t("screens.debugUi.navigationTitle"),
           }}
         />
       )}

@@ -1,7 +1,7 @@
 import { type Theme, useThemedStyles } from "@contexts/theme";
 import { type BoxStyleProps, withBoxStyle } from "@utils/boxStyles/hoc";
 import React, { useRef } from "react";
-import { Animated, StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { Animated, StyleSheet, View, ViewStyle } from "react-native";
 import { ExtendedPressable, type ExtendedPressableProps } from "./ExtendedPressable";
 import { Typography } from "./Typography";
 
@@ -14,6 +14,11 @@ const styles = (theme: Theme) =>
       paddingVertical: 10,
       paddingHorizontal: 20,
     },
+    typography: {},
+  });
+
+const stylesScheme = (theme: Theme) =>
+  StyleSheet.create({
     primaryContainer: {
       backgroundColor: theme.components.Button.primary.backgroundColor,
       borderColor: theme.components.Button.primary.borderColor,
@@ -30,6 +35,17 @@ const styles = (theme: Theme) =>
     },
   });
 
+const stylesDisable = (theme: Theme) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: theme.components.Button.disabled.backgroundColor,
+      borderColor: theme.components.Button.disabled.borderColor,
+    },
+    typography: {
+      color: theme.components.Button.disabled.color,
+    },
+  });
+
 type ButtonProps = BoxStyleProps &
   Omit<ExtendedPressableProps, "children"> & {
     text: string;
@@ -39,9 +55,9 @@ type ButtonProps = BoxStyleProps &
 
 const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", style, ...props }) => {
   const themedStyles = useThemedStyles<typeof styles>(styles);
+  const schemeStyle = useThemedStyles<typeof stylesScheme>(stylesScheme);
+  const disableStyle = useThemedStyles<typeof stylesDisable>(stylesDisable);
   const scaleAnim = useRef(new Animated.Value(1)).current;
-  const typographyStyle: StyleProp<TextStyle> =
-    scheme === "primary" ? themedStyles.primaryTypography : themedStyles.defaultTypography;
 
   return (
     <ExtendedPressable {...props}>
@@ -55,12 +71,19 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
           <Animated.View
             style={[
               themedStyles.container,
-              themedStyles[`${scheme}Container`],
-              style,
+              schemeStyle[`${scheme}Container`],
+              props.disabled && disableStyle.container,
               { transform: [{ scale: scaleAnim }] },
             ]}
           >
-            <Typography variant="button" style={typographyStyle}>
+            <Typography
+              variant="button"
+              style={[
+                themedStyles.typography,
+                schemeStyle[`${scheme}Typography`],
+                props.disabled && disableStyle.typography,
+              ]}
+            >
               {text}
             </Typography>
           </Animated.View>
@@ -71,3 +94,12 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
 };
 
 export const Button = withBoxStyle(ButtonComponent);
+
+export const Demo = () => (
+  <View style={{ gap: 16 }}>
+    <Button text="Default" />
+    <Button text="Schema Primary" scheme="primary" />
+    <Button text="Schema Default" scheme="default" />
+    <Button text="Disabled" disabled />
+  </View>
+);

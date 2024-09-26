@@ -42,6 +42,11 @@ export function useGoToDebugConfig() {
   return useCallback(() => navigation.navigate(Routes.DebugConfig), [navigation]);
 }
 
+export function useGoToDebugUi() {
+  const navigation = useNavigation<StackNavigationProp<AppStackParams>>();
+  return useCallback((item: string) => navigation.navigate(Routes.DebugUi, { item }), [navigation]);
+}
+
 export function useGoToPermissionRequired() {
   const navigation = useNavigation<StackNavigationProp<AppStackParams>>();
   return useCallback(

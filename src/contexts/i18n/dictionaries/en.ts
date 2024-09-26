@@ -19,11 +19,15 @@ export const dictionary = {
         terms: { label: "Terms and conditions" },
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Permissions screen" },
+        debugUi: { label: "Debug UI" },
       },
       debug: { title: "Debug" },
     },
     debugConfig: {
       navigationTitle: "Configuration debug",
+    },
+    debugUi: {
+      navigationTitle: "Debug UI",
     },
     home: {
       navigationTitle: "Home",
