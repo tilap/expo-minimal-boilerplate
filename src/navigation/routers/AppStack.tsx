@@ -2,21 +2,48 @@ import { useFeatureFlags } from "@contexts/config";
 import { useT } from "@contexts/i18n/index";
 import { useTheme } from "@contexts/theme";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
-import { About } from "@screens/About";
-import { DebugConfig } from "@screens/DebugConfig";
 import { Home } from "@screens/Home";
-import { LegalWebview } from "@screens/LegalWebview";
-import { PermissionRequired } from "@screens/PermissionRequired";
-import { Settings } from "@screens/Settings";
-import { SettingsDarkmode } from "@screens/SettingsDarkmode";
-import { SettingsLocale } from "@screens/SettingsLocale";
-import { SettingsThemeVariant } from "@screens/SettingsThemeVariant";
-import React from "react";
+import React, { lazy } from "react";
 import { Dimensions } from "react-native";
 import { enableScreens } from "react-native-screens";
 import { AppStackParams, Routes } from "../routes";
 import { NavbarHeadLeft } from "./NavbarHeadLeft";
 import { NavbarHeadRightHome } from "./NavbarHeadRightHome";
+
+const Settings = lazy(() =>
+  import("@screens/Settings").then((module) => ({ default: module.Settings })),
+);
+const SettingsDarkmode = lazy(() =>
+  import("@screens/SettingsDarkmode").then((module) => ({ default: module.SettingsDarkmode })),
+);
+const SettingsLocale = lazy(() =>
+  import("@screens/SettingsLocale").then((module) => ({ default: module.SettingsLocale })),
+);
+const SettingsThemeVariant = lazy(() =>
+  import("@screens/SettingsThemeVariant").then((module) => ({
+    default: module.SettingsThemeVariant,
+  })),
+);
+const PermissionRequired = lazy(() =>
+  import("@screens/PermissionRequired").then((module) => ({
+    default: module.PermissionRequired,
+  })),
+);
+const LegalWebview = lazy(() =>
+  import("@screens/LegalWebview").then((module) => ({
+    default: module.LegalWebview,
+  })),
+);
+const DebugConfig = lazy(() =>
+  import("@screens/DebugConfig").then((module) => ({
+    default: module.DebugConfig,
+  })),
+);
+const About = lazy(() =>
+  import("@screens/About").then((module) => ({
+    default: module.About,
+  })),
+);
 
 enableScreens();
 
@@ -85,7 +112,6 @@ function AppStack() {
           }}
         />
       )}
-
       {featureFlags.debugScreen && (
         <Stack.Screen
           name={Routes.PermissionRequired}
@@ -95,7 +121,6 @@ function AppStack() {
           }}
         />
       )}
-
       <Stack.Screen
         name={Routes.About}
         component={About}
@@ -103,7 +128,6 @@ function AppStack() {
           headerTitle: t("screens.about.navigationTitle"),
         }}
       />
-
       <Stack.Screen name={Routes.LegalWebview} component={LegalWebview} />
     </Stack.Navigator>
   );
