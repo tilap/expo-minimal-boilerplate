@@ -12,6 +12,16 @@ const styles = (theme: Theme) =>
       borderBottomWidth: 1,
       borderBottomColor: theme.components.List.item.borderBottomColor,
     },
+    itemContainerFirst: {
+      borderTopLeftRadius: theme.rounded.base,
+      borderTopRightRadius: theme.rounded.base,
+      overflow: "hidden",
+    },
+    itemContainerLast: {
+      borderBottomLeftRadius: theme.rounded.base,
+      borderBottomRightRadius: theme.rounded.base,
+      overflow: "hidden",
+    },
   });
 
 export type ListProps = PaperProps & {
@@ -31,6 +41,8 @@ export const List = ({ items, itemBoxProps, ...props }: ListProps): React.ReactE
             themedStyles.itemContainer,
             index !== items.length - 1 && themedStyles.itemContainerWithBorder,
             itemBoxProps?.style,
+            index === 0 && themedStyles.itemContainerFirst,
+            index === items.length - 1 && themedStyles.itemContainerLast,
           ]}
         >
           {item}

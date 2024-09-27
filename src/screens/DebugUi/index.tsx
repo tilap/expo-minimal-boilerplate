@@ -5,10 +5,11 @@ import { Demo as PaperDemo } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Demo as TypographyDemo } from "@components/Typography";
 import { useT } from "@contexts/i18n";
+import { NavbarHeadRightDarkmode } from "@navigation/components/NavbarHeadRightDarkmode";
 import { useGoToDebugUi } from "@navigation/helpers";
 import { type AppStackParams, Routes } from "@navigation/routes";
-import { RouteProp, useRoute } from "@react-navigation/native";
-import React from "react";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import React, { useLayoutEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -26,6 +27,14 @@ export function DebugUiScreen() {
   const SectionToRender = item && items[item as keyof typeof items];
   const gotoDebugUi = useGoToDebugUi();
   const t = useT();
+
+  const navigation = useNavigation();
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/no-unstable-nested-components -- required to keep hook calls order
+      headerRight: () => <NavbarHeadRightDarkmode />,
+    });
+  }, [navigation]);
 
   return (
     <ScreenContainer preset="full">

@@ -3,10 +3,12 @@ import { Theme, useTheme, useThemedStyles } from "@contexts/theme";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-type GenericIconProps = {
+export type GenericIconProps = {
   color: string;
   size: number;
 };
+
+export type NavbarIcon = React.ComponentType<GenericIconProps>;
 
 const styles = (theme: Theme) =>
   StyleSheet.create({
