@@ -4,6 +4,7 @@ import { Demo as IconDemo } from "@components/Icon";
 import { Demo as PaperDemo } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Demo as TypographyDemo } from "@components/Typography";
+import { useT } from "@contexts/i18n";
 import { useGoToDebugUi } from "@navigation/helpers";
 import { AppStackParams, Routes } from "@navigation/routes";
 import { RouteProp, useRoute } from "@react-navigation/native";
@@ -15,25 +16,36 @@ export function DebugUiScreen() {
   const { item } = route.params;
   const SectionToRender = item && items[item as keyof typeof items];
   const gotoDebugUi = useGoToDebugUi();
+  const t = useT();
 
   return (
     <ScreenContainer preset="full">
-      <Box fullWidth p={4}>
-        {SectionToRender && <Button mb={2} onPress={() => gotoDebugUi("")} text="Retour" />}
-        {!SectionToRender && (
-          <Box gap={16}>
+      {!SectionToRender && (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Box fullWidth p={4} gap={16} flex={1} justifyContent="center">
             {Object.keys(items).map((item) => (
               <Button key={item} mb={2} onPress={() => gotoDebugUi(item)} text={item} />
             ))}
           </Box>
-        )}
-      </Box>
-      {SectionToRender && (
-        <ScrollView style={{ flex: 1 }}>
-          <Box fullWidth p={4}>
-            <SectionToRender />
-          </Box>
         </ScrollView>
+      )}
+      {SectionToRender && (
+        <>
+          <ScrollView style={{ flex: 1 }}>
+            <Box fullWidth p={4}>
+              <SectionToRender />
+            </Box>
+          </ScrollView>
+
+          <Box fullWidth p={4}>
+            <Button
+              mt={2}
+              scheme="primary"
+              onPress={() => gotoDebugUi("")}
+              text={t("screens.debugUi.buttons.back.label")}
+            />
+          </Box>
+        </>
       )}
     </ScreenContainer>
   );

@@ -31,6 +31,9 @@ export const dictionary: Dictionary = {
     },
     debugUi: {
       navigationTitle: "Debug UI",
+      buttons: {
+        back: { label: "Retour" },
+      },
     },
     home: {
       navigationTitle: "Accueil",

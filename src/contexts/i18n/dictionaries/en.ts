@@ -28,6 +28,9 @@ export const dictionary = {
     },
     debugUi: {
       navigationTitle: "Debug UI",
+      buttons: {
+        back: { label: "Back" },
+      },
     },
     home: {
       navigationTitle: "Home",
