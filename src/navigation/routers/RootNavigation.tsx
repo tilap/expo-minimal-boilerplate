@@ -2,8 +2,8 @@ import { useTheme } from "@contexts/theme";
 import { NavigationContainer } from "@react-navigation/native";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { Dimensions } from "react-native";
 import { enableScreens } from "react-native-screens";
+import { defaultConfig } from "../config";
 import { RootStackParams, Routes } from "../routes";
 import AppStack from "./AppStack";
 
@@ -19,9 +19,7 @@ export function RootNavigation() {
       <Stack.Navigator
         initialRouteName={Routes.App}
         screenOptions={{
-          gestureEnabled: true,
-          gestureResponseDistance: Dimensions.get("screen").width,
-          headerShown: true,
+          ...defaultConfig,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           ...theme.screenOptions,
         }}
