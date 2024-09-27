@@ -96,6 +96,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
 export const Button = withBoxStyle(ButtonComponent);
 
 export const Demo = () => (
+  /* eslint-disable react-native/no-inline-styles -- demo purpose */
   <View style={{ gap: 16 }}>
     <Button text="Default" />
     <Button text="Schema Primary" scheme="primary" />
@@ -103,4 +104,5 @@ export const Demo = () => (
     <Button text="Schema Default" scheme="default" />
     <Button text="Disabled" disabled />
   </View>
+  /* eslint-enable react-native/no-inline-styles -- demo purpose */
 );

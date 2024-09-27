@@ -139,6 +139,7 @@ export const Typography = withBoxStyle(
 );
 
 export const Demo = () => (
+  /* eslint-disable react-native/no-inline-styles -- demo purpose */
   <View style={{ gap: 16 }}>
     <Typography>Default text</Typography>
     <Typography variant="h1">Variant h1</Typography>
@@ -158,4 +159,5 @@ export const Demo = () => (
     <Typography palette="text">Palette text</Typography>
     <Typography palette="navigation">Palette navigation</Typography>
   </View>
+  /* eslint-enable react-native/no-inline-styles -- demo purpose */
 );
