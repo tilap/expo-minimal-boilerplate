@@ -9,3 +9,8 @@ export const localeValues = {
   en: "English",
   fr: "Français",
 };
+
+export const localeValuesWithFlags = {
+  en: "🇬🇧 English",
+  fr: "🇫🇷 Français",
+};

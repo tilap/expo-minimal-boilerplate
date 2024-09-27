@@ -1,4 +1,7 @@
-/* Keep this screen very basic */
+/*
+ * Keep this screen the most basic and dependency free as possible
+ * as it is used at the top level of the app when everything went wrong..
+ */
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 

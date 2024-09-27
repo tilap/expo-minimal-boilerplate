@@ -1,14 +1,14 @@
 import { Theme, useThemedStyles } from "@contexts/theme";
-import { withBoxStyle } from "@utils/boxStyles/hoc";
+import { withBoxStyle } from "@utils/ui/boxStyles/hoc";
+import { withShadowStyle } from "@utils/ui/shadowStyles/hoc";
 import React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
-import { Box, BoxProps } from "./Box";
+import { StyleSheet, View, ViewStyle } from "react-native";
+import { Box } from "./Box";
 
 const styles = (theme: Theme) =>
   StyleSheet.create({
     root: {
       borderRadius: theme.rounded.base,
-      overflow: "hidden",
       width: "100%",
     },
     withBackground: {
@@ -16,18 +16,26 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type PaperProps = BoxProps & {
+export type PaperProps = {
   noBackground?: boolean;
   style?: ViewStyle;
 };
 
-export const Paper = withBoxStyle(
-  ({ children, noBackground, style }: React.PropsWithChildren<PaperProps>) => {
+export const Paper = withShadowStyle(
+  withBoxStyle(({ children, noBackground, style }: React.PropsWithChildren<PaperProps>) => {
     const themedStyles = useThemedStyles<typeof styles>(styles);
     return (
       <Box style={[themedStyles.root, !noBackground && themedStyles.withBackground, style]}>
         {children}
       </Box>
     );
-  },
+  }),
+);
+
+export const Demo = () => (
+  <View style={{ gap: 24, marginLeft: 24, marginRight: 24 }}>
+    <Paper style={{ height: 80, width: "100%" }} shadow="low" />
+    <Paper style={{ height: 80, width: "100%" }} shadow="base" />
+    <Paper style={{ height: 80, width: "100%" }} shadow="high" />
+  </View>
 );

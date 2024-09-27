@@ -1,6 +1,6 @@
 import { type Theme as NavigationTheme } from "@react-navigation/native";
 import { StackNavigationOptions } from "@react-navigation/stack";
-import { StatusBarProps } from "react-native";
+import { Platform, StatusBarProps } from "react-native";
 
 export type DarkMode = "dark" | "light";
 export const themeVariants = ["stitch", "flamingo", "grinch", "lorax"] as const;
@@ -56,6 +56,79 @@ const palettes: Record<DarkMode, Omit<Palette, ThemeVariantProps>> = {
   },
 };
 
+const typographyVariants = {
+  h1: {
+    fontFamily: "Black",
+    fontSize: 24,
+  },
+  h2: {
+    fontFamily: "Bold",
+    fontSize: 20,
+  },
+  h3: {
+    fontFamily: "Bold",
+    fontSize: 18,
+  },
+  h4: {
+    fontFamily: "Regular",
+    fontSize: 13,
+    textTransform: "uppercase",
+  },
+  text: {
+    fontFamily: "Regular",
+    fontSize: 16,
+  },
+  annotation: {
+    fontFamily: "Light",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  list: {
+    fontFamily: "Regular",
+    fontSize: 16,
+  },
+  button: {
+    fontFamily: "Bold",
+    fontSize: 18,
+  },
+};
+
+const shadows = {
+  low: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 1.2,
+      },
+      android: { elevation: 3 },
+    }),
+  },
+  base: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.23,
+        shadowRadius: 3.85,
+      },
+      android: { elevation: 6 },
+    }),
+  },
+  high: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.38,
+        shadowRadius: 6.37,
+      },
+      android: { elevation: 10 },
+    }),
+  },
+};
+
 export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
   const palette = {
     ...variants[variant],
@@ -95,8 +168,10 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     base: 6,
   };
 
-  const theme = {
+  return {
     darkMode: darkMode === "dark",
+
+    boxMultiplier: 4,
 
     navigation,
     screenOptions,
@@ -104,8 +179,26 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
 
     palette,
     rounded,
+    shadows,
 
     components: {
+      Button: {
+        primary: {
+          backgroundColor: palette.primary,
+          borderColor: palette.primary,
+          color: "#fff",
+        },
+        default: {
+          backgroundColor: palette.surface,
+          borderColor: palette.border,
+          color: palette.text,
+        },
+        disabled: {
+          backgroundColor: palette.surface,
+          borderColor: palette.border,
+          color: palette.subtle,
+        },
+      },
       List: {
         item: {
           borderBottomColor: palette.border,
@@ -115,15 +208,17 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
         container: {
           backgroundColor: palette.surface,
         },
-        label: {
-          color: palette.text,
-        },
         value: {
           color: palette.subtle,
         },
         icon: {
           default: { color: palette.subtle },
           highlight: { color: palette.navigation },
+        },
+      },
+      ListEntryText: {
+        label: {
+          color: palette.text,
         },
       },
       NavbarIconButton: {
@@ -138,16 +233,17 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
         backgroundColor: palette.surface,
       },
       Typography: {
-        text: { color: palette.text },
-        subtle: { color: palette.subtle },
-        primary: { color: palette.primary },
-        danger: { color: palette.danger },
-        navigation: { color: palette.navigation },
+        palette: {
+          text: { color: palette.text },
+          subtle: { color: palette.subtle },
+          primary: { color: palette.primary },
+          danger: { color: palette.danger },
+          navigation: { color: palette.navigation },
+        },
+        variants: typographyVariants,
       },
     },
-  };
-
-  return theme;
+  } as const;
 }
 
 export type Theme = ReturnType<typeof buildTheme>;

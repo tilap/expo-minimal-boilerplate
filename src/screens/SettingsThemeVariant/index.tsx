@@ -1,13 +1,13 @@
 import { BrushIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { useT } from "@contexts/i18n/index";
 import { themeVariants, useSetThemeVariant, useThemeVariant } from "@contexts/theme";
 import React from "react";
 
-export function SettingsThemeVariant() {
+export function SettingsThemeVariantScreen() {
   const themeVariant = useThemeVariant();
   const setThemeVariant = useSetThemeVariant();
   const t = useT();
@@ -17,7 +17,7 @@ export function SettingsThemeVariant() {
       <Paper>
         <List
           items={themeVariants.map((v) => (
-            <ListEntryGeneric
+            <ListEntryText
               label={t(`screens.settingsThemeVariant.options.${v}`)}
               onPress={() => {
                 setThemeVariant(v);

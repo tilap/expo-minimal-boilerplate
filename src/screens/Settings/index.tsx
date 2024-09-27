@@ -1,7 +1,7 @@
 import { Box } from "@components/Box";
 import { StartToEndIcon } from "@components/Icon";
 import { List } from "@components/List";
-import { ListEntryGeneric } from "@components/ListEntryGeneric";
+import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
@@ -11,14 +11,19 @@ import { useLocale, useT } from "@contexts/i18n/index";
 import { useThemeVariant } from "@contexts/theme";
 import {
   useGoToAbout,
-  useGoToDebug,
   useGoToSettingsDarkmode,
   useGoToSettingsLocale,
   useGoToSettingsThemeVariant,
 } from "@navigation/helpers";
-import React from "react";
+import React, { lazy } from "react";
 
-export function Settings() {
+const ListEntryResetPreferences = lazy(() =>
+  import("./ListEntryResetPreferences").then((module) => ({
+    default: module.ListEntryResetPreferences,
+  })),
+);
+
+export function SettingsScreen() {
   const locale = useLocale();
   const darkMode = useDarkmode();
   const themeVariant = useThemeVariant();
@@ -26,7 +31,7 @@ export function Settings() {
   const featureFlags = useFeatureFlags();
 
   const gotoAbout = useGoToAbout();
-  const gotoDebug = useGoToDebug();
+
   const goToSettingsDarkmode = useGoToSettingsDarkmode();
   const goToSettingsLocale = useGoToSettingsLocale();
   const gotoSettingsThemeVariant = useGoToSettingsThemeVariant();
@@ -36,21 +41,21 @@ export function Settings() {
       <Paper mb={2}>
         <List
           items={[
-            <ListEntryGeneric
-              label={t("screens.settings.options.darkmode.label")}
-              value={t(`screens.settings.options.darkmode.values.${darkMode}`)}
+            <ListEntryText
+              label={t("screens.settings.entries.darkmode.label")}
+              value={t(`screens.settings.entries.darkmode.values.${darkMode}`)}
               onPress={goToSettingsDarkmode}
               Icon={StartToEndIcon}
             />,
-            <ListEntryGeneric
-              label={t("screens.settings.options.themeVariant.label")}
-              value={t(`screens.settings.options.themeVariant.values.${themeVariant}`)}
+            <ListEntryText
+              label={t("screens.settings.entries.themeVariant.label")}
+              value={t(`screens.settings.entries.themeVariant.values.${themeVariant}`)}
               onPress={gotoSettingsThemeVariant}
               Icon={StartToEndIcon}
             />,
-            <ListEntryGeneric
-              label={t("screens.settings.options.locale.label")}
-              value={t(`screens.settings.options.locale.values.${locale as "fr" | "en"}`)}
+            <ListEntryText
+              label={t("screens.settings.entries.locale.label")}
+              value={t(`screens.settings.entries.locale.values.${locale as "fr" | "en"}`)}
               onPress={goToSettingsLocale}
               Icon={StartToEndIcon}
             />,
@@ -64,31 +69,23 @@ export function Settings() {
         </Typography>
       </Box>
 
-      <Paper mb={0}>
+      {featureFlags.resetPreferences && (
+        <Paper mb={8}>
+          <List items={[<ListEntryResetPreferences />]} />
+        </Paper>
+      )}
+
+      <Paper>
         <List
           items={[
-            <ListEntryGeneric
-              label={t("screens.settings.options.about.label")}
+            <ListEntryText
+              label={t("screens.settings.entries.about.label")}
               onPress={gotoAbout}
               Icon={StartToEndIcon}
             />,
           ]}
         />
       </Paper>
-
-      {featureFlags.debugScreen && (
-        <Paper mt={8}>
-          <List
-            items={[
-              <ListEntryGeneric
-                label={t("screens.settings.options.debug.label")}
-                onPress={gotoDebug}
-                Icon={StartToEndIcon}
-              />,
-            ]}
-          />
-        </Paper>
-      )}
     </ScreenContainer>
   );
 }

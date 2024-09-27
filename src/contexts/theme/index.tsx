@@ -14,6 +14,7 @@ type Context = {
   theme: Theme;
   themeVariant: ThemeVariant;
   setThemeVariant: (_v: ThemeVariant) => void;
+  resetThemeVariant: () => void; // Add reset function type
 };
 const ThemeContext = React.createContext<Context>({} as unknown as Context);
 
@@ -34,15 +35,19 @@ export function ThemeProvider({
   );
   const theme = buildTheme(themeVariant, darkMode);
 
-  _setThemeVariant;
   function setThemeVariant(v: ThemeVariant) {
     const newVariant = (themeVariants.includes(v) ? v : themeVariants[0]) as ThemeVariant;
     _setThemeVariant(newVariant);
     onThemeVariantChange?.(newVariant);
   }
 
+  function resetThemeVariant() {
+    _setThemeVariant(defaultThemeVariant);
+    onThemeVariantChange?.(defaultThemeVariant);
+  }
+
   return (
-    <ThemeContext.Provider value={{ theme, themeVariant, setThemeVariant }}>
+    <ThemeContext.Provider value={{ theme, themeVariant, setThemeVariant, resetThemeVariant }}>
       <StatusBar {...theme.StatusBar} />
       {children}
     </ThemeContext.Provider>
@@ -66,4 +71,9 @@ export function useThemeVariant() {
 export function useSetThemeVariant() {
   const { setThemeVariant } = useContext(ThemeContext);
   return setThemeVariant;
+}
+
+export function useResetThemeVariant() {
+  const { resetThemeVariant } = useContext(ThemeContext);
+  return resetThemeVariant;
 }

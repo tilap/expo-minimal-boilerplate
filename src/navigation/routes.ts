@@ -1,16 +1,20 @@
+import { PermissionType } from "@screens/PermissionRequired";
+
 export enum Routes {
   About = "About",
   App = "App",
-  Debug = "Debug",
+  DebugConfig = "DebugConfig",
+  DebugUi = "DebugUi",
   Home = "Home",
   LegalWebview = "LegalWebview",
+  PermissionRequired = "PermissionRequired",
   Settings = "Settings",
   SettingsDarkmode = "SettingsDarkmode",
   SettingsLocale = "SettingsLocale",
   SettingsThemeVariant = "SettingsThemeVariant",
 }
 
-type LegalWebviewType = "privacy" | "terms";
+export type LegalWebviewType = "privacy" | "terms";
 
 export type RootStackParams = {
   [Routes.App]: undefined;
@@ -18,9 +22,11 @@ export type RootStackParams = {
 
 export type AppStackParams = {
   [Routes.About]: undefined;
-  [Routes.Debug]: undefined;
+  [Routes.DebugConfig]: undefined;
+  [Routes.DebugUi]: { item: string };
   [Routes.Home]: undefined;
   [Routes.LegalWebview]: { type: LegalWebviewType };
+  [Routes.PermissionRequired]: { type: PermissionType };
   [Routes.Settings]: undefined;
   [Routes.SettingsDarkmode]: undefined;
   [Routes.SettingsLocale]: undefined;

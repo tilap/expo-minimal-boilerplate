@@ -21,10 +21,10 @@ type MarginPaddingProps = {
 // Define the sx prop type, which can be either an object or a function returning an object
 // Now using a generic type T for theme
 type SxProps<T> =
-  | (ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] }) // Include fullWidth and display in sx
+  | (ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] })
   | ((
       _theme: T,
-    ) => ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] }); // Include fullWidth and display in sx function
+    ) => ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] });
 
 // Define props for flexbox properties
 type FlexboxProps = {
@@ -39,13 +39,14 @@ type FlexboxProps = {
     | "space-around"
     | "space-evenly";
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+  gap?: DimensionValue;
 };
 
 // Combine all props for the Box component, now using a generic type T for theme
 export interface BoxProps<T> extends ViewProps, MarginPaddingProps, FlexboxProps {
   sx?: SxProps<T>;
-  fullWidth?: boolean; // Add fullWidth property
-  display?: ViewStyle["display"]; // Add display property
+  fullWidth?: boolean;
+  display?: ViewStyle["display"];
 }
 
 // Apply margin and padding styles to a ViewStyle object
@@ -79,12 +80,15 @@ const applyMarginPadding = (
   };
 };
 
+export type BaseTheme = {
+  boxMultiplier?: number;
+};
+
 // Create styles based on props and theme
 // Now using a generic type Theme with a default of object
-export function createStyles<Theme = object>(
+export function createStyles<Theme extends BaseTheme = object>(
   props: BoxProps<Theme>,
   theme: Theme,
-  multiplier = 4,
 ): ViewStyle {
   const {
     flex,
@@ -92,11 +96,14 @@ export function createStyles<Theme = object>(
     flexWrap,
     justifyContent,
     alignItems,
+    gap, // Destructure gap
     sx,
     fullWidth,
     display,
     ...marginPaddingProps
   } = props;
+
+  const multiplier = theme?.boxMultiplier || 4;
 
   // Create base styles from flexbox props
   const baseStyles: ViewStyle = {
@@ -106,8 +113,9 @@ export function createStyles<Theme = object>(
     ...(flexWrap && { flexWrap }),
     ...(justifyContent && { justifyContent }),
     ...(alignItems && { alignItems }),
-    ...(fullWidth && { width: "100%" }), // Set width to 100% if fullWidth is true
-    ...(display && { display }), // Set display property if provided
+    ...(fullWidth && { width: "100%" }),
+    ...(display && { display }),
+    ...(gap !== undefined && { gap: Number(applyMultiplier(multiplier, gap) || 0) }),
   };
 
   // Apply margin and padding to base styles

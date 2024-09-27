@@ -3,12 +3,13 @@ import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
 import { useConfig } from "@contexts/config";
-import { usePreferences } from "@utils/stores/preferences";
+import { useCorePreferences } from "@utils/stores/preferences";
 import React from "react";
 
-export function Debug() {
+export function DebugConfigScreen() {
   const config = useConfig();
-  const preferences = usePreferences();
+  const preferences = useCorePreferences();
+
   return (
     <ScreenContainer preset="page" withScrollView>
       <Box p={2}>

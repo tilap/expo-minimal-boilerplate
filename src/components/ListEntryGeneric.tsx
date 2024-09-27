@@ -10,9 +10,6 @@ const styles = (theme: Theme) =>
     root: {
       backgroundColor: theme.components.ListEntryGeneric.container.backgroundColor,
     },
-    label: {
-      color: theme.components.ListEntryGeneric.label.color,
-    },
     value: {
       color: theme.components.ListEntryGeneric.value.color,
     },
@@ -26,8 +23,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export type ListEntryMenuProps = {
-  label: string;
+export type ListEntryGenericProps = React.PropsWithChildren<{
   value?: string;
   onPress?: () => void;
   Icon?: React.ComponentType<{
@@ -36,23 +32,21 @@ export type ListEntryMenuProps = {
     style?: ViewStyle | TextStyle;
   }>;
   highlightIcon?: boolean;
-};
+}>;
 
-export const ListEntryGeneric: React.FC<ListEntryMenuProps> = ({
+export const ListEntryGeneric: React.FC<ListEntryGenericProps> = ({
   highlightIcon,
   Icon,
-  label,
   value,
   onPress,
+  children,
 }) => {
   const themedStyles = useThemedStyles(styles);
 
   return (
     <ExtendedPressable onPress={onPress} style={themedStyles.root}>
       <Box py={3} px={3} flexDirection="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="list" style={themedStyles.label}>
-          {label}
-        </Typography>
+        {children}
         <Box flexDirection="row" alignItems="center">
           {value && (
             <Typography variant="list" style={themedStyles.value}>
