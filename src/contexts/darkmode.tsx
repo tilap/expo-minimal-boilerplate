@@ -4,7 +4,7 @@ import { useColorScheme } from "react-native";
 const resolvedDarkModes = ["light", "dark"] as const;
 export const darkModes = [...resolvedDarkModes, "system"] as const;
 
-type ResolvedDarkMode = (typeof resolvedDarkModes)[number];
+export type ResolvedDarkMode = (typeof resolvedDarkModes)[number];
 export type DarkMode = (typeof darkModes)[number];
 
 type Context = {
@@ -75,6 +75,11 @@ function useDarkmodeContext() {
 export function useDarkmode() {
   const { darkMode } = useDarkmodeContext();
   return darkMode;
+}
+
+export function useResolvedDarkmode() {
+  const { resolvedDarkMode } = useDarkmodeContext();
+  return resolvedDarkMode;
 }
 
 export function useSetDarkmode() {
