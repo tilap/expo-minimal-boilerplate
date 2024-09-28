@@ -5,6 +5,7 @@ import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/
 import { HomeScreen } from "@screens/Home";
 import React, { lazy } from "react";
 import { enableScreens } from "react-native-screens";
+import { merge } from "ts-deepmerge";
 import { NavbarHeadLeftDefault } from "../components/NavbarHeadLeftDefault";
 import { NavbarHeadRightSettings } from "../components/NavbarHeadRightSettings";
 import { defaultConfig } from "../config";
@@ -65,10 +66,9 @@ function AppStack() {
     <Stack.Navigator
       initialRouteName={Routes.Home}
       screenOptions={{
-        ...defaultConfig,
+        ...merge(defaultConfig, theme.screenOptions),
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerLeft: NavbarHeadLeftDefault,
-        ...theme.screenOptions,
       }}
     >
       <Stack.Screen
