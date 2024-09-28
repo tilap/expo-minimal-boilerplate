@@ -23,6 +23,7 @@ export const ExtendedPressable: React.FC<ExtendedPressableProps> = ({
   return (
     <Pressable
       android_ripple={{ color: rippleColor }}
+      // TODO: style should be themabled
       style={({ pressed }) =>
         [
           typeof style === "function" ? style({ pressed }) : style,

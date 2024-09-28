@@ -168,10 +168,12 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     base: 6,
   };
 
+  const boxMultiplier = 4;
+
   return {
     darkMode: darkMode === "dark",
 
-    boxMultiplier: 4,
+    boxMultiplier,
 
     navigation,
     screenOptions,
@@ -180,6 +182,14 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     palette,
     rounded,
     shadows,
+    spacings: {
+      xs: boxMultiplier / 4,
+      sm: boxMultiplier / 2,
+      base: boxMultiplier,
+      lg: boxMultiplier * 2,
+      xl: boxMultiplier * 4,
+      screen: boxMultiplier * 4,
+    },
 
     components: {
       Button: {

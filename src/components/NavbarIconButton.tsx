@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       minWidth: 42,
-      minHeight: 32,
+      minHeight: 32, // TODO: depends on navigation height, so in percent or in thme would be better
       borderRadius: theme.rounded.sm,
       backgroundColor: theme.components.NavbarIconButton.root.backgroundColor,
     },

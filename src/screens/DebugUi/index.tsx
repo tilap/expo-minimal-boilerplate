@@ -50,12 +50,12 @@ export function DebugUiScreen() {
       {SectionToRender && (
         <>
           <ScrollView style={styles.scrollView}>
-            <Box fullWidth p={4}>
+            <Box fullWidth>
               <SectionToRender />
             </Box>
           </ScrollView>
 
-          <Box fullWidth p={4}>
+          <Box fullWidth mt={16}>
             <Button
               mt={2}
               scheme="primary"

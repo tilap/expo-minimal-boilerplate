@@ -1,3 +1,4 @@
+import { type Theme, useThemedStyles } from "@contexts/theme";
 import React from "react";
 import { SafeAreaView, StyleSheet, ViewStyle } from "react-native";
 import { Box } from "./Box";
@@ -8,27 +9,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-const presetStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  preset: {
-    display: "flex",
-    flex: 1,
-    width: "100%",
-  },
-  fullPreset: {
-    height: "100%",
-  },
-  pagePreset: {
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-  },
-  withPadding: {
-    padding: 4 * 4,
-  },
-});
+const presetStyles = (theme: Theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    preset: {
+      display: "flex",
+      flex: 1,
+      width: "100%",
+    },
+    fullPreset: {
+      height: "100%",
+    },
+    pagePreset: {
+      justifyContent: "flex-start",
+      alignItems: "flex-start",
+    },
+    withPadding: {
+      padding: theme.spacings.screen,
+    },
+  });
 
 type Preset = "page" | "full";
 
@@ -46,9 +47,14 @@ export function ScreenContainer({
   disablePadding,
   withScrollView,
 }: ScreenContainerProps) {
+  const presetThemedStyles = useThemedStyles(presetStyles);
   const content = (
     <Box
-      style={[presetStyles[`${preset}Preset`], !disablePadding && presetStyles.withPadding, style]}
+      style={[
+        presetThemedStyles[`${preset}Preset`],
+        !disablePadding && presetThemedStyles.withPadding,
+        style,
+      ]}
     >
       {children}
     </Box>

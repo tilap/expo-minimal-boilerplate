@@ -15,11 +15,11 @@ const styles = (theme: Theme) =>
     },
     icon: {
       color: theme.components.ListEntryGeneric.icon.default.color,
-      marginStart: 4,
+      marginStart: theme.spacings.base,
     },
     iconHighlighted: {
       color: theme.components.ListEntryGeneric.icon.highlight.color,
-      marginStart: 4,
+      marginStart: theme.spacings.base,
     },
   });
 

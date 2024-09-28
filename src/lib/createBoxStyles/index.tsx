@@ -18,13 +18,6 @@ type MarginPaddingProps = {
   px?: DimensionValue;
   py?: DimensionValue;
 };
-// Define the sx prop type, which can be either an object or a function returning an object
-// Now using a generic type T for theme
-type SxProps<T> =
-  | (ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] })
-  | ((
-      _theme: T,
-    ) => ViewStyle & MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] });
 
 // Define props for flexbox properties
 type FlexboxProps = {
@@ -43,8 +36,7 @@ type FlexboxProps = {
 };
 
 // Combine all props for the Box component, now using a generic type T for theme
-export interface BoxProps<T> extends ViewProps, MarginPaddingProps, FlexboxProps {
-  sx?: SxProps<T>;
+export interface BoxProps extends ViewProps, MarginPaddingProps, FlexboxProps {
   fullWidth?: boolean;
   display?: ViewStyle["display"];
 }
@@ -80,16 +72,9 @@ const applyMarginPadding = (
   };
 };
 
-export type BaseTheme = {
-  boxMultiplier?: number;
-};
-
 // Create styles based on props and theme
 // Now using a generic type Theme with a default of object
-export function createStyles<Theme extends BaseTheme = object>(
-  props: BoxProps<Theme>,
-  theme: Theme,
-): ViewStyle {
+export function createStyles(props: BoxProps, multiplier: number = 4): ViewStyle {
   const {
     flex,
     flexDirection,
@@ -97,13 +82,10 @@ export function createStyles<Theme extends BaseTheme = object>(
     justifyContent,
     alignItems,
     gap, // Destructure gap
-    sx,
     fullWidth,
     display,
     ...marginPaddingProps
   } = props;
-
-  const multiplier = theme?.boxMultiplier || 4;
 
   // Create base styles from flexbox props
   const baseStyles: ViewStyle = {
@@ -119,34 +101,14 @@ export function createStyles<Theme extends BaseTheme = object>(
   };
 
   // Apply margin and padding to base styles
-  const baseStylesWithMarginPadding = applyMarginPadding(
-    baseStyles,
-    marginPaddingProps,
-    multiplier,
-  );
-
-  // Process sx prop
-  const sxStyles: ViewStyle &
-    MarginPaddingProps & { fullWidth?: boolean; display?: ViewStyle["display"] } =
-    typeof sx === "function" ? sx(theme) : sx || {};
-
-  // Apply margin and padding to sx styles
-  const sxStylesWithMarginPadding = applyMarginPadding(sxStyles, sxStyles, multiplier);
-
-  // Combine base styles and sx styles, with sx styles taking precedence
-  return {
-    ...baseStylesWithMarginPadding,
-    ...sxStylesWithMarginPadding,
-    ...(sxStyles.fullWidth ? { width: "100%" } : {}),
-    ...(sxStyles.display ? { display: sxStyles.display } : {}),
-  };
+  return applyMarginPadding(baseStyles, marginPaddingProps, multiplier);
 }
 
 // Usage example (commented out)
 //
 // export const Box: React.FC<BoxProps> = ({ children, style, sx, ...props }) => {
 //   const theme = useTheme();
-//   const boxStyles = createStyles({ ...props, sx }, theme);
+//   const boxStyles = createStyles({...props }, 4);
 //   return <View style={[boxStyles, style]}>{children}</View>;
 // };
 //

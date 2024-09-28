@@ -11,8 +11,8 @@ const styles = (theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
       borderRadius: theme.rounded.base,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      paddingVertical: theme.spacings.lg,
+      paddingHorizontal: theme.spacings.xl,
     },
     typography: {},
   });
