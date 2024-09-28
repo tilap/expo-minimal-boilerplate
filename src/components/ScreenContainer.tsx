@@ -13,43 +13,46 @@ const presetStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  page: {
+  preset: {
     display: "flex",
     flex: 1,
     width: "100%",
+  },
+  fullPreset: {
+    height: "100%",
+  },
+  pagePreset: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    paddingHorizontal: 3 * 4,
-    paddingVertical: 5 * 4,
   },
-  full: {
-    display: "flex",
-    flex: 1,
-    width: "100%",
-    height: "100%",
-  },
-  fullWithPadding: {
-    display: "flex",
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 4 * 4,
-    paddingVertical: 3 * 4,
+  withPadding: {
+    padding: 4 * 4,
   },
 });
 
+type Preset = "page" | "full";
+
 export type ScreenContainerProps = React.PropsWithChildren<{
-  preset?: keyof typeof presetStyles;
+  preset?: Preset;
   style?: ViewStyle | ViewStyle[];
+  disablePadding?: boolean;
   withScrollView?: boolean;
 }>;
+
 export function ScreenContainer({
   children,
   preset = "full",
   style,
-  withScrollView = false,
+  disablePadding,
+  withScrollView,
 }: ScreenContainerProps) {
-  const content = <Box style={[presetStyles[preset], style]}>{children}</Box>;
+  const content = (
+    <Box
+      style={[presetStyles[`${preset}Preset`], !disablePadding && presetStyles.withPadding, style]}
+    >
+      {children}
+    </Box>
+  );
   return (
     <SafeAreaView style={styles.container}>
       {withScrollView ? <ExtendedScrollView fullWidth>{content}</ExtendedScrollView> : content}

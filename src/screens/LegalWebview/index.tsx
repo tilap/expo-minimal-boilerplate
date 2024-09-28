@@ -11,9 +11,6 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-na
 import { WebView } from "react-native-webview";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   nestedContainer: {
     flex: 1,
   },
@@ -47,7 +44,7 @@ export function LegalWebviewScreen() {
   };
 
   return (
-    <ScreenContainer preset="full" style={styles.container}>
+    <ScreenContainer preset="full" disablePadding>
       {(isLoading || hasError) && (
         <Box flex={1} alignItems="center" justifyContent="center" fullWidth>
           {isLoading && (
