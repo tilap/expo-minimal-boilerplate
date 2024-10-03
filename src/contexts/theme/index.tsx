@@ -60,8 +60,10 @@ export function useTheme() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- just so generic
-export const useThemedStyles = <T extends (..._args: any) => any>(styles: any): ReturnType<T> =>
-  styles(useTheme());
+export const useThemedStyles = <T extends (..._args: any) => any>(
+  styles: any,
+  ...extras: any
+): ReturnType<T> => styles(useTheme(), ...extras);
 
 export function useThemeVariant() {
   const { themeVariant } = useContext(ThemeContext);
@@ -76,4 +78,9 @@ export function useSetThemeVariant() {
 export function useResetThemeVariant() {
   const { resetThemeVariant } = useContext(ThemeContext);
   return resetThemeVariant;
+}
+
+export function useSpacings() {
+  const { theme } = useContext(ThemeContext);
+  return theme.spacings;
 }

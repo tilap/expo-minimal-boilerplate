@@ -1,7 +1,7 @@
 import { type Theme, useThemedStyles } from "@contexts/theme";
 import React from "react";
 import { SafeAreaView, StyleSheet, ViewStyle } from "react-native";
-import { Box } from "./Box";
+import { Box, type BoxProps } from "./Box";
 import { ExtendedScrollView } from "./ExtendedScrollView";
 
 const styles = StyleSheet.create({
@@ -33,12 +33,14 @@ const presetStyles = (theme: Theme) =>
 
 type Preset = "page" | "full";
 
-export type ScreenContainerProps = React.PropsWithChildren<{
-  preset?: Preset;
-  style?: ViewStyle | ViewStyle[];
-  disablePadding?: boolean;
-  withScrollView?: boolean;
-}>;
+export type ScreenContainerProps = React.PropsWithChildren<
+  BoxProps & {
+    preset?: Preset;
+    style?: ViewStyle | ViewStyle[];
+    disablePadding?: boolean;
+    withScrollView?: boolean;
+  }
+>;
 
 export function ScreenContainer({
   children,
@@ -46,10 +48,12 @@ export function ScreenContainer({
   style,
   disablePadding,
   withScrollView,
+  ...boxProps
 }: ScreenContainerProps) {
   const presetThemedStyles = useThemedStyles(presetStyles);
   const content = (
     <Box
+      {...boxProps}
       style={[
         presetThemedStyles[`${preset}Preset`],
         !disablePadding && presetThemedStyles.withPadding,

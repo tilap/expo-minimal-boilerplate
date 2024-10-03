@@ -33,6 +33,13 @@ const stylesScheme = (theme: Theme) =>
     defaultTypography: {
       color: theme.components.Button.default.color,
     },
+    dangerContainer: {
+      backgroundColor: theme.components.Button.danger.backgroundColor,
+      borderColor: theme.components.Button.danger.borderColor,
+    },
+    dangerTypography: {
+      color: theme.components.Button.danger.color,
+    },
   });
 
 const stylesDisable = (theme: Theme) =>
@@ -49,7 +56,7 @@ const stylesDisable = (theme: Theme) =>
 type ButtonProps = BoxStyleProps &
   Omit<ExtendedPressableProps, "children"> & {
     text: string;
-    scheme?: "primary" | "default";
+    scheme?: "primary" | "danger" | "default";
     style?: ViewStyle;
   };
 
@@ -71,7 +78,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
           <Animated.View
             style={[
               themedStyles.container,
-              schemeStyle[`${scheme}Container`],
+              schemeStyle[`${scheme}Container` as keyof typeof schemeStyle],
               props.disabled && disableStyle.container,
               { transform: [{ scale: scaleAnim }] },
             ]}
@@ -80,7 +87,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
               variant="button"
               style={[
                 themedStyles.typography,
-                schemeStyle[`${scheme}Typography`],
+                schemeStyle[`${scheme}Typography` as keyof typeof schemeStyle],
                 props.disabled && disableStyle.typography,
               ]}
             >
@@ -101,7 +108,7 @@ export const Demo = () => (
     <Button text="Default" />
     <Button text="Schema Primary" scheme="primary" />
     <Button text="Schema Default" scheme="default" />
-    <Button text="Schema Default" scheme="default" />
+    <Button text="Schema Danger" scheme="danger" />
     <Button text="Disabled" disabled />
   </View>
   /* eslint-enable react-native/no-inline-styles -- demo purpose */

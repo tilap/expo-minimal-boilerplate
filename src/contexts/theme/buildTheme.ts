@@ -149,10 +149,11 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
 
   const screenOptions: StackNavigationOptions = {
     headerStyle: {
-      backgroundColor: palette.background,
+      backgroundColor: "transparent",
+      borderBottomWidth: 0,
     },
     headerTitleStyle: {
-      fontFamily: "Bold",
+      fontFamily: "Bold", // Shoulb be based on some enums
       color: palette.text,
     },
     headerTintColor: palette.navigation,
@@ -192,6 +193,12 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     },
 
     components: {
+      ActivityIndicator: {
+        color: palette.primary,
+      },
+      AssetImage: {
+        backgroundColor: darkMode === "dark" ? "#333" : "#ccc",
+      },
       Button: {
         primary: {
           backgroundColor: palette.primary,
@@ -207,6 +214,11 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
           backgroundColor: palette.surface,
           borderColor: palette.border,
           color: palette.subtle,
+        },
+        danger: {
+          backgroundColor: palette.danger,
+          borderColor: palette.danger,
+          color: "#fff",
         },
       },
       List: {
