@@ -78,7 +78,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ text, scheme = "default", styl
           <Animated.View
             style={[
               themedStyles.container,
-              schemeStyle[`${scheme}Container` as keyof typeof schemeStyle],
+              schemeStyle[`${scheme}Container`],
               props.disabled && disableStyle.container,
               { transform: [{ scale: scaleAnim }] },
             ]}
