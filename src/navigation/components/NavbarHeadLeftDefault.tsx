@@ -23,7 +23,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export function NavbarHeadLeft() {
+export function NavbarHeadLeftDefault() {
   const navigation = useNavigation();
   const themedStyles = useThemedStyles<typeof styles>(styles);
   const canGoPrevious = useNavigationState((state) => state.routes.length > 1);

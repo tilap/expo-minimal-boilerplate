@@ -64,7 +64,7 @@ export function PermissionRequiredScreen({ type = "mediaLibrary" }: PermissionRe
   const themedStyles = useThemedStyles<typeof styles>(styles);
   const device = useShortDeviceName();
   return (
-    <ScreenContainer preset="fullWithPadding">
+    <ScreenContainer preset="full">
       <Box flex={1} justifyContent="center" alignItems="center" fullWidth>
         <Paper p={6} style={themedStyles.paper}>
           <Typography variant="h2" mb={6}>

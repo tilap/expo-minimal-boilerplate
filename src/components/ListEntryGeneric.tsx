@@ -1,7 +1,8 @@
-import { ExtendedPressable } from "@components/ExtendedPressable";
+import { ExtendedPressable, type ExtendedPressableProps } from "@components/ExtendedPressable";
+import { type IconProps } from "@components/Icon";
 import { type Theme, useThemedStyles } from "@contexts/theme";
 import React from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import { Box } from "./Box";
 import { Typography } from "./Typography";
 
@@ -15,36 +16,33 @@ const styles = (theme: Theme) =>
     },
     icon: {
       color: theme.components.ListEntryGeneric.icon.default.color,
-      marginStart: 4,
+      marginStart: theme.spacings.base,
     },
     iconHighlighted: {
       color: theme.components.ListEntryGeneric.icon.highlight.color,
-      marginStart: 4,
+      marginStart: theme.spacings.base,
     },
   });
 
-export type ListEntryGenericProps = React.PropsWithChildren<{
-  value?: string;
-  onPress?: () => void;
-  Icon?: React.ComponentType<{
-    size?: number;
-    color?: string;
-    style?: ViewStyle | TextStyle;
-  }>;
-  highlightIcon?: boolean;
-}>;
+export type ListEntryGenericProps = React.PropsWithChildren<
+  ExtendedPressableProps & {
+    value?: string;
+    Icon?: React.ComponentType<Pick<IconProps, "size" | "style">>;
+    highlightIcon?: boolean;
+  }
+>;
 
 export const ListEntryGeneric: React.FC<ListEntryGenericProps> = ({
   highlightIcon,
   Icon,
   value,
-  onPress,
   children,
+  ...pressableProps
 }) => {
   const themedStyles = useThemedStyles(styles);
 
   return (
-    <ExtendedPressable onPress={onPress} style={themedStyles.root}>
+    <ExtendedPressable {...pressableProps} style={[pressableProps?.style, themedStyles.root]}>
       <Box py={3} px={3} flexDirection="row" justifyContent="space-between" alignItems="center">
         {children}
         <Box flexDirection="row" alignItems="center">

@@ -12,7 +12,7 @@ export function DebugConfigScreen() {
 
   return (
     <ScreenContainer preset="page" withScrollView>
-      <Box p={2}>
+      <Box px={2} pb={2}>
         <Typography variant="h3">Configuration</Typography>
       </Box>
       <Paper>
@@ -20,7 +20,7 @@ export function DebugConfigScreen() {
           <Typography variant="text">{JSON.stringify(config, null, 4)}</Typography>
         </Box>
       </Paper>
-      <Box p={2} mt={4}>
+      <Box px={2} pb={2} mt={6}>
         <Typography variant="h3">Preferences</Typography>
       </Box>
       <Paper>

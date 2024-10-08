@@ -29,6 +29,7 @@ export const DarkmodeLightIcon = (props: IconProps) => (
 export const SettingsIcon = (props: IconProps) => <Ionicons name="settings-outline" {...props} />;
 
 export const Demo = () => (
+  /* eslint-disable react-native/no-inline-styles -- demo purpose */
   <View style={{ flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
     <EndToStartIcon size={36} />
     <StartToEndIcon size={36} />
@@ -39,4 +40,5 @@ export const Demo = () => (
     <DarkmodeLightIcon size={36} />
     <SettingsIcon size={36} />
   </View>
+  /* eslint-enable react-native/no-inline-styles -- demo purpose */
 );

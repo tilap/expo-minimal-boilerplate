@@ -33,9 +33,11 @@ export const Paper = withShadowStyle(
 );
 
 export const Demo = () => (
+  /* eslint-disable react-native/no-inline-styles -- demo purpose */
   <View style={{ gap: 24, marginLeft: 24, marginRight: 24 }}>
     <Paper style={{ height: 80, width: "100%" }} shadow="low" />
     <Paper style={{ height: 80, width: "100%" }} shadow="base" />
     <Paper style={{ height: 80, width: "100%" }} shadow="high" />
   </View>
+  /* eslint-enable react-native/no-inline-styles -- demo purpose */
 );

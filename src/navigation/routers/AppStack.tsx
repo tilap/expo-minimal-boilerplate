@@ -4,11 +4,12 @@ import { useTheme } from "@contexts/theme";
 import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 import { HomeScreen } from "@screens/Home";
 import React, { lazy } from "react";
-import { Dimensions } from "react-native";
 import { enableScreens } from "react-native-screens";
+import { merge } from "ts-deepmerge";
+import { NavbarHeadLeftDefault } from "../components/NavbarHeadLeftDefault";
+import { NavbarHeadRightSettings } from "../components/NavbarHeadRightSettings";
+import { defaultConfig } from "../config";
 import { AppStackParams, Routes } from "../routes";
-import { NavbarHeadLeft } from "./NavbarHeadLeft";
-import { NavbarHeadRightHome } from "./NavbarHeadRightHome";
 
 const SettingsScreen = lazy(() =>
   import("@screens/Settings").then((module) => ({ default: module.SettingsScreen })),
@@ -65,12 +66,9 @@ function AppStack() {
     <Stack.Navigator
       initialRouteName={Routes.Home}
       screenOptions={{
-        gestureEnabled: true,
-        gestureResponseDistance: Dimensions.get("screen").width,
-        headerShown: true,
+        ...merge(defaultConfig, theme.screenOptions),
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerLeft: NavbarHeadLeft,
-        ...theme.screenOptions,
+        headerLeft: NavbarHeadLeftDefault,
       }}
     >
       <Stack.Screen
@@ -78,7 +76,7 @@ function AppStack() {
         component={HomeScreen}
         options={{
           headerTitle: t("screens.home.navigationTitle"),
-          headerRight: NavbarHeadRightHome,
+          headerRight: NavbarHeadRightSettings,
         }}
       />
 

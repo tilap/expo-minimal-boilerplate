@@ -149,10 +149,11 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
 
   const screenOptions: StackNavigationOptions = {
     headerStyle: {
-      backgroundColor: palette.background,
+      backgroundColor: "transparent",
+      borderBottomWidth: 0,
     },
     headerTitleStyle: {
-      fontFamily: "Bold",
+      fontFamily: "Bold", // Shoulb be based on some enums
       color: palette.text,
     },
     headerTintColor: palette.navigation,
@@ -168,10 +169,12 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     base: 6,
   };
 
+  const boxMultiplier = 4;
+
   return {
     darkMode: darkMode === "dark",
 
-    boxMultiplier: 4,
+    boxMultiplier,
 
     navigation,
     screenOptions,
@@ -180,8 +183,22 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
     palette,
     rounded,
     shadows,
+    spacings: {
+      xs: boxMultiplier / 4,
+      sm: boxMultiplier / 2,
+      base: boxMultiplier,
+      lg: boxMultiplier * 2,
+      xl: boxMultiplier * 4,
+      screen: boxMultiplier * 4,
+    },
 
     components: {
+      ActivityIndicator: {
+        color: palette.primary,
+      },
+      AssetImage: {
+        backgroundColor: darkMode === "dark" ? "#333" : "#ccc",
+      },
       Button: {
         primary: {
           backgroundColor: palette.primary,
@@ -197,6 +214,11 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
           backgroundColor: palette.surface,
           borderColor: palette.border,
           color: palette.subtle,
+        },
+        danger: {
+          backgroundColor: palette.danger,
+          borderColor: palette.danger,
+          color: "#fff",
         },
       },
       List: {

@@ -1,3 +1,4 @@
+import { ActivityIndicator } from "@components/ActivityIndicator";
 import { Box } from "@components/Box";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
@@ -6,14 +7,11 @@ import { useT } from "@contexts/i18n/index";
 import { AppStackParams, Routes } from "@navigation/routes";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { WebView } from "react-native-webview";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   nestedContainer: {
     flex: 1,
   },
@@ -47,7 +45,7 @@ export function LegalWebviewScreen() {
   };
 
   return (
-    <ScreenContainer preset="full" style={styles.container}>
+    <ScreenContainer preset="full" disablePadding>
       {(isLoading || hasError) && (
         <Box flex={1} alignItems="center" justifyContent="center" fullWidth>
           {isLoading && (
