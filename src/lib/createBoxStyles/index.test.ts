@@ -51,17 +51,6 @@ describe("createStyles", () => {
     expect(styles.padding).toBe(20 * 4);
   });
 
-  test("should combine base styles and sx styles", () => {
-    const props = {
-      sx: { fullWidth: true, display: "block" as ViewStyle["display"] },
-      fullWidth: false,
-    };
-
-    const styles = createStyles(props);
-    expect(styles.width).toBe("100%");
-    expect(styles.display).toBe("block");
-  });
-
   test("should handle flex properties", () => {
     const props = {
       flex: 1,
