@@ -61,7 +61,9 @@ export function useTheme() {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- just so generic
 export const useThemedStyles = <T extends (..._args: any) => any>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- just so generic
   styles: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- just so generic
   ...extras: any
 ): ReturnType<T> => styles(useTheme(), ...extras);
 
