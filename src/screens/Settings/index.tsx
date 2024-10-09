@@ -5,7 +5,7 @@ import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
-import { useFeatureFlags } from "@contexts/config";
+import { useFeatureFlags, useRateAppUrl, useShareAppUrl } from "@contexts/config";
 import { useDarkmode } from "@contexts/darkmode";
 import { useLocale, useT } from "@contexts/i18n/index";
 import { useThemeVariant } from "@contexts/theme";
@@ -22,6 +22,16 @@ const ListEntryResetPreferences = lazy(() =>
     default: module.ListEntryResetPreferences,
   })),
 );
+const ListEntryShareApp = lazy(() =>
+  import("./components/ListEntryShareApp").then((module) => ({
+    default: module.ListEntryShareApp,
+  })),
+);
+const ListEntryRateApp = lazy(() =>
+  import("./components/ListEntryRateApp").then((module) => ({
+    default: module.ListEntryRateApp,
+  })),
+);
 
 export function SettingsScreen() {
   const locale = useLocale();
@@ -35,6 +45,9 @@ export function SettingsScreen() {
   const goToSettingsDarkmode = useGoToSettingsDarkmode();
   const goToSettingsLocale = useGoToSettingsLocale();
   const gotoSettingsThemeVariant = useGoToSettingsThemeVariant();
+
+  const rateUrl = useRateAppUrl();
+  const shareUrl = useShareAppUrl();
 
   return (
     <ScreenContainer preset="page" withScrollView>
@@ -83,7 +96,21 @@ export function SettingsScreen() {
               onPress={gotoAbout}
               Icon={StartToEndIcon}
             />,
-          ]}
+            rateUrl ? (
+              <ListEntryRateApp url={rateUrl} label={t("screens.settings.entries.rateApp.label")} />
+            ) : (
+              false
+            ),
+            shareUrl ? (
+              <ListEntryShareApp
+                url={shareUrl}
+                label={t("screens.settings.entries.shareApp.label")}
+                message={t("screens.settings.entries.shareApp.message")}
+              />
+            ) : (
+              false
+            ),
+          ].filter((v) => v !== false)}
         />
       </Paper>
     </ScreenContainer>

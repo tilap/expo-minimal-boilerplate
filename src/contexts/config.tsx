@@ -25,3 +25,13 @@ export const useUrls = () => {
   const config = useConfig();
   return config.urls;
 };
+
+export const useShareAppUrl = () => {
+  const urls = useUrls();
+  return urls.shareApp;
+};
+
+export const useRateAppUrl = () => {
+  const urls = useUrls();
+  return urls.rateApp;
+};

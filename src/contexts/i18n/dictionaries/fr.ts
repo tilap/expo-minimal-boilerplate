@@ -139,6 +139,11 @@ export const dictionary: Dictionary = {
           values: themeValues,
         },
         about: { label: "À propos" },
+        shareApp: {
+          label: "Partager l'application",
+          message: "Essaye cette application incroyable!",
+        },
+        rateApp: { label: "Noter l'application" },
         resetPreferences: {
           label: "Réinitialiser vos préférences",
           confirm: {
