@@ -27,7 +27,8 @@ const presetStyles = (theme: Theme) =>
       alignItems: "flex-start",
     },
     withPadding: {
-      padding: theme.spacings.screen,
+      paddingHorizontal: theme.spacings.screen,
+      paddingVertical: theme.spacings.screen / 2,
     },
   });
 
