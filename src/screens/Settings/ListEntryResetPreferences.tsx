@@ -16,10 +16,12 @@ export function ListEntryResetPreferences() {
       [
         {
           text: t("screens.settings.entries.resetPreferences.confirm.cancelLabel"),
-          // onPress: () => clearAppData(),
           style: "cancel",
         },
-        { text: "OK", onPress: () => resetPreferences() },
+        {
+          text: t("screens.settings.entries.resetPreferences.confirm.confirmLabel"),
+          onPress: () => resetPreferences(),
+        },
       ],
     );
 
