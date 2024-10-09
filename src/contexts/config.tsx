@@ -35,3 +35,8 @@ export const useRateAppUrl = () => {
   const urls = useUrls();
   return urls.rateApp;
 };
+
+export const useFeedbackEmail = () => {
+  const config = useConfig();
+  return config.feedbackEmail;
+};

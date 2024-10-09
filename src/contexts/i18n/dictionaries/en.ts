@@ -20,8 +20,10 @@ export const dictionary = {
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Permissions screen" },
         debugUi: { label: "Debug UI" },
+        feedback: { label: "Send feedback" },
       },
       debug: { title: "Debug" },
+      contact: { title: "Contact" },
     },
     debugConfig: {
       navigationTitle: "Configuration debug",

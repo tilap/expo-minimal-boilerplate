@@ -4876,6 +4876,11 @@ expo-splash-screen@~0.27.5:
   dependencies:
     "@expo/prebuild-config" "7.0.6"
 
+expo-store-review@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/expo-store-review/-/expo-store-review-7.0.2.tgz#cbe22d1ea12666710df66d78e351defa86a7d17b"
+  integrity sha512-bXBXPv2KhfE9Ct14vof9Y1kAGlTFXmGdOLPToyg/eM6lMSALwyrLMkJ3Ba2XCI8PzKGKlx/+Yx5bImrZs4cUwg==
+
 expo@^51.0.20:
   version "51.0.32"
   resolved "https://registry.yarnpkg.com/expo/-/expo-51.0.32.tgz#2e6068f33cb6a361a3aa35e03bf6d5ce21a4ee2d"

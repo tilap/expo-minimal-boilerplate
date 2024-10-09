@@ -21,10 +21,10 @@ export const dictionary: Dictionary = {
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Écran de permissions" },
         debugUi: { label: "Débogage de l'ui" },
+        feedback: { label: "Envoyer un feedback" },
       },
-      debug: {
-        title: "Débogage",
-      },
+      debug: { title: "Débogage" },
+      contact: { title: "Contact" },
     },
     debugConfig: {
       navigationTitle: "Debug config",

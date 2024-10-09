@@ -43,6 +43,7 @@ const config = {
     shareApp: process.env.EXPO_PUBLIC_SHARE_APP_URL || "", // leave empty will disable the share button
     rateApp: process.env.EXPO_PUBLIC_RATE_APP_URL || "", // leave empty will disable the rate button
   },
+  feedbackEmail: process.env.EXPO_PUBLIC_FEEDBACK_EMAIL || "", // leave empty will disable the feedback button
 } as const;
 
 export default config;

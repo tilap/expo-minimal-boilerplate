@@ -4,7 +4,7 @@ import { ListEntryText } from "@components/ListEntryText";
 import { Paper } from "@components/Paper";
 import { ScreenContainer } from "@components/ScreenContainer";
 import { Typography } from "@components/Typography";
-import { useFeatureFlags, useUrls } from "@contexts/config";
+import { useFeatureFlags, useFeedbackEmail, useUrls } from "@contexts/config";
 import { useT } from "@contexts/i18n/index";
 import {
   useGoToDebugConfig,
@@ -14,6 +14,7 @@ import {
 } from "@navigation/helpers";
 import { getAppVersion } from "@utils/appVersion";
 import React from "react";
+import { Linking } from "react-native";
 
 export function AboutScreen() {
   const t = useT();
@@ -22,6 +23,14 @@ export function AboutScreen() {
   const gotoDebugConfig = useGoToDebugConfig();
   const gotoPermissionRequired = useGoToPermissionRequired();
   const gotoDebugUi = useGoToDebugUi();
+  const feedbackEmail = useFeedbackEmail();
+
+  const handleSendFeedback = () => {
+    if (feedbackEmail) {
+      Linking.openURL(`mailto:${feedbackEmail}`);
+    }
+  };
+
   const urls = useUrls();
   return (
     <ScreenContainer preset="page" withScrollView>
@@ -49,6 +58,26 @@ export function AboutScreen() {
           ]}
         />
       </Paper>
+
+      {feedbackEmail && (
+        <>
+          <Typography mt={8} px={3} variant="h4" palette="subtle">
+            {t("screens.about.contact.title")}
+          </Typography>
+          <Paper mt={2}>
+            <List
+              items={[
+                <ListEntryText
+                  label={t("screens.about.entries.feedback.label")}
+                  onPress={handleSendFeedback}
+                  Icon={StartToEndIcon}
+                />,
+              ]}
+            />
+          </Paper>
+        </>
+      )}
+
       {featureFlags.debugScreen && (
         <>
           <Typography mt={8} px={3} variant="h4" palette="subtle">
