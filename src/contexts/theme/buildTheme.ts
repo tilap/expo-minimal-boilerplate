@@ -246,6 +246,7 @@ export function buildTheme(variant: ThemeVariant, darkMode: DarkMode) {
       NavbarIconButton: {
         root: {
           backgroundColor: "transparent",
+          minHeight: 42,
         },
         Icon: {
           color: palette.navigation,

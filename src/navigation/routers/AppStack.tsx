@@ -6,7 +6,7 @@ import { HomeScreen } from "@screens/Home";
 import React, { lazy } from "react";
 import { enableScreens } from "react-native-screens";
 import { merge } from "ts-deepmerge";
-import { NavbarHeadLeftDefault } from "../components/NavbarHeadLeftDefault";
+import { NavbarHeadLeftBack } from "../components/NavbarHeadLeftBack";
 import { NavbarHeadRightSettings } from "../components/NavbarHeadRightSettings";
 import { defaultConfig } from "../config";
 import { AppStackParams, Routes } from "../routes";
@@ -68,7 +68,7 @@ function AppStack() {
       screenOptions={{
         ...merge(defaultConfig, theme.screenOptions),
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerLeft: NavbarHeadLeftDefault,
+        headerLeft: NavbarHeadLeftBack,
       }}
     >
       <Stack.Screen
