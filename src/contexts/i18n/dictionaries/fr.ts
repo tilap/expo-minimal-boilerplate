@@ -21,10 +21,10 @@ export const dictionary: Dictionary = {
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Écran de permissions" },
         debugUi: { label: "Débogage de l'ui" },
+        feedback: { label: "Envoyer un feedback" },
       },
-      debug: {
-        title: "Débogage",
-      },
+      debug: { title: "Débogage" },
+      contact: { title: "Contact" },
     },
     debugConfig: {
       navigationTitle: "Debug config",
@@ -139,6 +139,11 @@ export const dictionary: Dictionary = {
           values: themeValues,
         },
         about: { label: "À propos" },
+        shareApp: {
+          label: "Partager l'application",
+          message: "Essaye cette application incroyable!",
+        },
+        rateApp: { label: "Noter l'application" },
         resetPreferences: {
           label: "Réinitialiser vos préférences",
           confirm: {

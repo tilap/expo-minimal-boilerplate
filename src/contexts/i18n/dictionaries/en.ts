@@ -20,8 +20,10 @@ export const dictionary = {
         debugConfig: { label: "Configuration" },
         debugPermissionRequired: { label: "Permissions screen" },
         debugUi: { label: "Debug UI" },
+        feedback: { label: "Send feedback" },
       },
       debug: { title: "Debug" },
+      contact: { title: "Contact" },
     },
     debugConfig: {
       navigationTitle: "Configuration debug",
@@ -136,12 +138,17 @@ export const dictionary = {
           values: themeValues,
         },
         about: { label: "About" },
+        shareApp: {
+          label: "Share the app",
+          message: "Check out this awesome app!",
+        },
+        rateApp: { label: "Rate the app" },
         resetPreferences: {
           label: "Reset all your preferences",
           confirm: {
             title: "Reset preferences",
             message: "Are you sure you want to reset all your preferences?",
-            confirmLabel: "Reset",
+            confirmLabel: "Yes",
             cancelLabel: "Cancel",
           },
         },

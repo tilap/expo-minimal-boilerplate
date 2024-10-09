@@ -24,6 +24,8 @@ const config = {
   featureFlags: {
     debugScreen: castEnvToBoolean(process.env.EXPO_PUBLIC_FEATURE_DEBUG_SCREEN),
     resetPreferences: castEnvToBoolean(process.env.EXPO_PUBLIC_FEATURE_RESET_PREFERENCES),
+    shareApp: castEnvToBoolean(process.env.EXPO_PUBLIC_FEATURE_SHARE_APP),
+    rateApp: castEnvToBoolean(process.env.EXPO_PUBLIC_FEATURE_RATE_APP),
   },
   Platform: {
     OS: Platform.OS,
@@ -38,7 +40,10 @@ const config = {
   urls: {
     privacy: process.env.EXPO_PUBLIC_URL_PRIVACY || "", // leave empty to hide the screen
     terms: process.env.EXPO_PUBLIC_URL_TERMS || "", // leave empty to hide the screen
+    shareApp: process.env.EXPO_PUBLIC_SHARE_APP_URL || "", // leave empty will disable the share button
+    rateApp: process.env.EXPO_PUBLIC_RATE_APP_URL || "", // leave empty will disable the rate button
   },
+  feedbackEmail: process.env.EXPO_PUBLIC_FEEDBACK_EMAIL || "", // leave empty will disable the feedback button
 } as const;
 
 export default config;
