@@ -64,14 +64,25 @@ export function AssetImage({
   const fadeAnim = useRef(new Animated.Value(disableAnimation ? 1 : 0)).current;
 
   useEffect(() => {
+    let isMounted = true;
     getAssetInfoAsync(id).then((info) => {
-      setLocalUri(info.localUri);
+      if (isMounted) {
+        setLocalUri(info.localUri);
+      }
     });
-  }, [animationDuration, disableAnimation, fadeAnim, id]);
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
 
   return (
     <Box
-      style={[themedStyles.container, rounded && themedStyles[`${rounded}RoundedContainer`], style]}
+      style={[
+        themedStyles.container,
+        rounded && themedStyles[`${rounded}RoundedContainer`],
+        { width, height },
+        style,
+      ]}
     >
       <ActivityIndicator size="large" animating={isLoading} />
       <Animated.Image
